@@ -46,6 +46,12 @@
           "description": "Allow Git AI Commits to automatically commit changes.",
           "scope": "global"
         },
+        "gitAiCommits.obfuscationLevel": {
+          "type": "string",
+          "enum": ["low", "medium", "high"],
+          "default": "medium",
+          "description": "Define el nivel de ofuscación para los cambios en el código."
+        },
         "gitAiCommits.obfuscateWords": {
           "type": "array",
           "items": {
