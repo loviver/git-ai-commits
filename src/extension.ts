@@ -80,7 +80,7 @@ async function generateCommitMessage(context: vscode.ExtensionContext): Promise<
 		return [];
 	}
 
-	console.log(diff);
+	console.log(diff, context);
 		
 	const promptPath = path.join(context.extensionPath, 'dist', 'prompt.txt');
 	const prompt = fs.readFileSync(promptPath, 'utf-8');
@@ -102,8 +102,8 @@ async function generateCommitMessage(context: vscode.ExtensionContext): Promise<
 
 export function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(
-			vscode.commands.registerCommand('git-ai-commits.requestSuggestions', requestCommitSuggestions),
-			vscode.commands.registerCommand('git-ai-commits.openSettings', openExtensionSettings)
+		vscode.commands.registerCommand('git-ai-commits.requestSuggestions', () => requestCommitSuggestions(context)),
+		vscode.commands.registerCommand('git-ai-commits.openSettings', () => openExtensionSettings())
 	);
 }
 
