@@ -1,7 +1,8 @@
 {
   "name": "git-ai-commits",
+  "publisher": "loviver",
   "displayName": "git-ai-commits",
-  "description": "Suggest commits with AI",
+  "description": "Suggest commits with AIs",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.98.0"
@@ -18,19 +19,50 @@
   "contributes": {
     "commands": [
       {
-        "command": "git-ai-commits.test",
-        "title": "Hello World GIT AI Commits"
+        "command": "git-ai-commits.requestSuggestions",
+        "title": "Generate AI-Powered Commit Suggestions",
+        "category": "Git AI Commits",
+        "description": "Analyze code changes and generate commit messages using AI."
+      },
+      {
+        "command": "git-ai-commits.openSettings",
+        "title": "Open Git AI Commits Settings",
+        "category": "Git AI Commits",
+        "description": "Configure AI settings for generating commit messages."
       }
-    ]
+    ],
+    "configuration": {
+      "title": "Git AI Commits",
+      "properties": {
+        "gitAiCommits.apiKey": {
+          "type": "string",
+          "default": "",
+          "description": "API Key para autenticarse con Gemini AI",
+          "scope": "global"
+        },
+        "gitAiCommits.obfuscateWords": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [],
+          "description": "Lista de palabras que serán ofuscadas en los commits generados.",
+          "scope": "global"
+        }
+      }
+    }
   },
   "scripts": {
     "vscode:prepublish": "yarn run package",
     "compile": "yarn run check-types && yarn run lint && node esbuild.js",
-    "watch": "npm-run-all -p watch:* watch:extension",
+    
+    "watch-dev": "npm-run-all -p watch:esbuild watch:extension",
     "watch:esbuild": "node esbuild.js --watch",
+    "watch:extension": "node installExtension.js --watch",
+
+    "watch": "npm-run-all -p watch:* watch:extension",
     "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
     "watch-tests": "tsc -p . -w --outDir out",
-    "watch:extension": "nodemon --ext ts,json --exec \"vsce package && code --install-extension $(ls *.vsix | tail -n 1) && code --extensionDevelopmentPath=$PWD\"",
     "package": "yarn run check-types && yarn run lint && node esbuild.js --production",
     "compile-tests": "tsc -p . --outDir out",
     "pretest": "yarn run compile-tests && yarn run compile && yarn run lint",

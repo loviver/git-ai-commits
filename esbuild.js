@@ -1,5 +1,6 @@
 const esbuild = require("esbuild");
-
+const path = require("path");
+const fs = require("fs");
 const production = process.argv.includes('--production');
 const watch = process.argv.includes('--watch');
 
@@ -22,6 +23,18 @@ const esbuildProblemMatcherPlugin = {
 		});
 	},
 };
+
+function copyPromptFile() {
+	const srcPath = path.resolve(__dirname, 'src/prompt.txt');
+	const destPath = path.resolve(__dirname, 'dist/prompt.txt');
+
+	if (fs.existsSync(srcPath)) {
+		fs.copyFileSync(srcPath, destPath);
+		console.log(`✅ prompt.txt copiado a dist/`);
+	} else {
+		console.warn(`⚠️ Archivo prompt.txt no encontrado en src/`);
+	}
+}
 
 async function main() {
 	const ctx = await esbuild.context({
@@ -47,6 +60,7 @@ async function main() {
 	} else {
 		await ctx.rebuild();
 		await ctx.dispose();
+		copyPromptFile();
 	}
 }
 
