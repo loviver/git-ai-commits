@@ -101,11 +101,18 @@ async function generateCommitMessage(context: vscode.ExtensionContext): Promise<
 }
 
 export function activate(context: vscode.ExtensionContext) {
-    const disposableTest = vscode.commands.registerCommand('git-ai-commits.requestSuggestions', async () => {
+	context.subscriptions.push(
+			vscode.commands.registerCommand('git-ai-commits.requestSuggestions', requestCommitSuggestions),
+			vscode.commands.registerCommand('git-ai-commits.openSettings', openExtensionSettings)
+	);
+}
+
+async function requestCommitSuggestions(context: vscode.ExtensionContext) {
+	try {
 			const commitMessages = await generateCommitMessage(context);
-			
-			if (commitMessages.length === 0) {
-					vscode.window.showWarningMessage("No se pudieron generar mensajes de commit.");
+
+			if (!commitMessages || commitMessages.length === 0) {
+					vscode.window.showWarningMessage("No se pudieron generar mensajes de commit. Intenta de nuevo.");
 					return;
 			}
 
@@ -114,17 +121,35 @@ export function activate(context: vscode.ExtensionContext) {
 					canPickMany: false
 			});
 
+			const config = vscode.workspace.getConfiguration("gitAiCommits");
+			const autoCommit = config.get<string[]>("autoCommit") || [];
+			
 			if (selectedMessage) {
-					vscode.env.clipboard.writeText(selectedMessage);
+				if(autoCommit) {
+					const git = simpleGit(vscode.workspace.workspaceFolders?.[0]?.uri.fsPath || "");
+					try {
+							await git.commit(selectedMessage);
+							vscode.window.showInformationMessage("Cambios confirmados con éxito.");
+					} catch (error) {
+							vscode.window.showErrorMessage(`Error al hacer commit: ${error}`);
+					}
+				}
+				else {
+					await vscode.env.clipboard.writeText(selectedMessage);
 					vscode.window.showInformationMessage("Mensaje copiado al portapapeles.");
+				}
 			}
-	});
+	} catch (error) {
+			vscode.window.showErrorMessage(`Error generando sugerencias: ${error instanceof Error ? error.message : String(error)}`);
+	}
+}
 
-	const disposableSettings = vscode.commands.registerCommand('git-ai-commits.openSettings', async () => {
+async function openExtensionSettings() {
+	try {
 			await vscode.commands.executeCommand('workbench.action.openSettings', '@ext:loviver.git-ai-commits');
-	});
-
-	context.subscriptions.push(disposableTest, disposableSettings);
+	} catch (error) {
+			vscode.window.showErrorMessage("No se pudo abrir la configuración de la extensión.");
+	}
 }
 
 export function deactivate() {}

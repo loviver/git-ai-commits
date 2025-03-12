@@ -40,6 +40,12 @@
           "description": "API Key para autenticarse con Gemini AI",
           "scope": "global"
         },
+        "gitAiCommits.autoCommit": {
+          "type": "boolean",
+          "default": false,
+          "description": "Allow Git AI Commits to automatically commit changes.",
+          "scope": "global"
+        },
         "gitAiCommits.obfuscateWords": {
           "type": "array",
           "items": {
