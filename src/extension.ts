@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 import simpleGit from 'simple-git';
 import { generateCommitMessages } from './services/commitService';
+import { i18n } from './services/i18n';
 
 export function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(
@@ -13,13 +14,17 @@ async function requestCommitSuggestions(context: vscode.ExtensionContext) {
   try {
     const commitMessages = await generateCommitMessages(context);
 
-    if (!commitMessages || commitMessages.length === 0) {
-      vscode.window.showWarningMessage("No se pudieron generar mensajes de commit. Intenta de nuevo.");
+    if(!commitMessages) {
+      return;
+    }
+    
+    if (commitMessages && commitMessages.length === 0) {
+      vscode.window.showWarningMessage(i18n.t('warning.git.noStagedFiles'));
       return;
     }
 
     const selectedMessage = await vscode.window.showQuickPick(commitMessages, {
-      placeHolder: "Selecciona un mensaje de commit",
+      placeHolder: i18n.t('info.commit.selectMessage'),
       canPickMany: false
     });
 
@@ -32,17 +37,18 @@ async function requestCommitSuggestions(context: vscode.ExtensionContext) {
         const git = simpleGit(workspacePath);
         try {
           await git.commit(selectedMessage);
-          vscode.window.showInformationMessage("Cambios confirmados con éxito.");
+          vscode.window.showInformationMessage(i18n.t('success.commit.confirmed', { error: selectedMessage }));
         } catch (error) {
-          vscode.window.showErrorMessage(`Error al hacer commit: ${error}`);
+          vscode.window.showErrorMessage(i18n.t('error.commit.failed', { error: selectedMessage }));
         }
       } else {
         await vscode.env.clipboard.writeText(selectedMessage);
-        vscode.window.showInformationMessage("Mensaje copiado al portapapeles.");
+        vscode.window.showInformationMessage(i18n.t('success.clipboard.copied', { error: selectedMessage }));
       }
     }
   } catch (error) {
-    vscode.window.showErrorMessage(`Error generando sugerencias: ${error instanceof Error ? error.message : String(error)}`);
+    const message = error instanceof Error ? error.message : String(error);
+    vscode.window.showErrorMessage(i18n.t('error.suggestions.generationFailed', { error: message }));
   }
 }
 
@@ -50,7 +56,8 @@ async function openExtensionSettings() {
   try {
     await vscode.commands.executeCommand('workbench.action.openSettings', '@ext:loviver.git-ai-commits');
   } catch (error) {
-    vscode.window.showErrorMessage("No se pudo abrir la configuración de la extensión.");
+    const message = error instanceof Error ? error.message : String(error);
+    vscode.window.showErrorMessage(i18n.t('error.extension.configOpenFailed', { error: message }));
   }
 }
 

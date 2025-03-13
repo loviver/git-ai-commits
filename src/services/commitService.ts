@@ -2,38 +2,45 @@ import * as vscode from 'vscode';
 import fs from 'fs';
 import path from 'path';
 import GeminiAI from './GeminiAI';
-import { getGitDiff } from './gitService';
+import { getGitBranch, getGitDiff } from './gitService';
 import { sanitizeDiff } from './sanitizeService';
+
+import AppConfig from './app-config';
+import { i18n } from "./i18n";
 
 let agentAI: GeminiAI | null = null;
 
 function initializeAgent() {
-  const config = vscode.workspace.getConfiguration("gitAiCommits");
+  const config = vscode.workspace.getConfiguration(AppConfig.name);
   const apiKey = config.get<string>("apiKey") || "";
 
   if (!apiKey) {
-    vscode.window.showErrorMessage("No API Key found. Please set 'gitAiCommits.apiKey' in settings.");
-    return;
+    vscode.window.showErrorMessage(i18n.t("error.noApiKey", { key: AppConfig.name }));
+    return false;
   }
   agentAI = new GeminiAI(apiKey);
+  return true;
 }
 
-export async function generateCommitMessages(context: vscode.ExtensionContext): Promise<string[]> {
+export async function generateCommitMessages(context: vscode.ExtensionContext): Promise<string[] | null> {
   if (!agentAI) {
     initializeAgent();
   }
+
   if (!agentAI) {
-    return [];
+    return null;
   }
 
+  const branchName = await getGitBranch();
   let diff = await getGitDiff();
+
   if (!diff) {
     return [];
   }
 
   diff = sanitizeDiff(diff);
 
-  const config = vscode.workspace.getConfiguration("gitAiCommits");
+  const config = vscode.workspace.getConfiguration(AppConfig.name);
   const langCommits = config.get<string>("lang") || "english";
   const promptPath = path.join(context.extensionPath, 'dist', 'prompt.txt');
 
@@ -41,7 +48,11 @@ export async function generateCommitMessages(context: vscode.ExtensionContext): 
   prompt = prompt.replace(`{lang}`, langCommits);
 
   const response = await agentAI.askQuestion(`
-    analiza el siguiente diff y genera la lista de commits en formato JSON válido:
+    Task:  
+      - Analyze the following diff  
+
+    Context:  
+      - You are on the branch (${branchName})  
 
     \`\`\`
     ${diff}

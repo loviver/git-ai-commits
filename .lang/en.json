@@ -1,0 +1,14 @@
+{
+  "error.noApiKey": "No API key found. Please set ${key} in the settings.",
+  "error.commit.generationFailed": "Commit messages could not be generated. Please try again.",
+  "error.commit.failed": "Error committing: ${error}",
+  "error.suggestions.generationFailed": "Error generating suggestions: ${error}",
+  "error.extension.configOpenFailed": "Could not open extension settings: ${error}",
+
+  "warning.git.noStagedFiles": "There are no files in staging.",
+
+  "info.commit.selectMessage": "Select a commit message.",
+
+  "success.commit.confirmed": "Changes successfully committed.",
+  "success.clipboard.copied": "Message copied to clipboard."
+}

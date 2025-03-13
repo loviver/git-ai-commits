@@ -1,7 +1,9 @@
 import * as vscode from 'vscode';
 
+import AppConfig from './app-config';
+
 export function sanitizeDiff(diff: string): string {
-  const config = vscode.workspace.getConfiguration("gitAiCommits");
+  const config = vscode.workspace.getConfiguration(AppConfig.name);
   const obfuscationLevel = config.get<string>("obfuscationLevel") || "medium";
   const obfuscateWords = config.get<string[]>("obfuscateWords") || [];
 
@@ -12,7 +14,6 @@ export function sanitizeDiff(diff: string): string {
       .replace(/https?:\/\/[^\s]+/g, 'https://api.placeholder.com');
   }
 
-  // Obfuscación media: incluye datos estructurales
   if (obfuscationLevel === "medium") {
     diff = diff
       .replace(/\b\d{12,}\b/g, 'PLACEHOLDER_NUMBER')

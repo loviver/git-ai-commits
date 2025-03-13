@@ -35,31 +35,31 @@
     "configuration": {
       "title": "Git AI Commits",
       "properties": {
-        "gitAiCommits.apiKey": {
+        "git-ai-commits.apiKey": {
           "type": "string",
           "default": "",
           "description": "API Key para autenticarse con Gemini AI",
           "scope": "global"
         },
-        "gitAiCommits.autoCommit": {
+        "git-ai-commits.autoCommit": {
           "type": "boolean",
           "default": false,
           "description": "Allow Git AI Commits to automatically commit changes.",
           "scope": "global"
         },
-        "gitAiCommits.obfuscationLevel": {
+        "git-ai-commits.obfuscationLevel": {
           "type": "string",
           "enum": ["low", "medium", "high"],
           "default": "medium",
           "description": "Define el nivel de ofuscación para los cambios en el código."
         },
-        "gitAiCommits.lang": {
+        "git-ai-commits.lang": {
           "type": "string",
           "enum": ["spanish", "english"],
           "default": "english",
           "description": "Define el idioma en el que se generarán los commits."
         },
-        "gitAiCommits.obfuscateWords": {
+        "git-ai-commits.obfuscateWords": {
           "type": "array",
           "items": {
             "type": "string"

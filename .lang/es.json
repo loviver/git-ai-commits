@@ -1,0 +1,14 @@
+{
+  "error.noApiKey": "No se encontró una clave API. Por favor, configura ${key} en los ajustes.",
+  "error.commit.generationFailed": "No se pudieron generar mensajes de commit. Intenta de nuevo.",
+  "error.commit.failed": "Error al hacer commit: ${error}",
+  "error.suggestions.generationFailed": "Error generando sugerencias: ${error}",
+  "error.extension.configOpenFailed": "No se pudo abrir la configuración de la extensión: ${error}",
+
+  "warning.git.noStagedFiles": "No hay archivos en staging.",
+
+  "info.commit.selectMessage": "Selecciona un mensaje de commit.",
+
+  "success.commit.confirmed": "Cambios confirmados con éxito.",
+  "success.clipboard.copied": "Mensaje copiado al portapapeles."
+}

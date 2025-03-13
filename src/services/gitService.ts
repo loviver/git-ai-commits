@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
 import simpleGit from 'simple-git';
+import { i18n } from './i18n';
 
 export async function getGitDiff(): Promise<string> {
   const workspacePath = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath || '';
@@ -11,7 +12,7 @@ export async function getGitDiff(): Promise<string> {
     .filter(file => file.length > 0);
 
   if (stagedFiles.length === 0) {
-    vscode.window.showErrorMessage("No hay archivos en staging.");
+    vscode.window.showErrorMessage(i18n.t('warning.noStagedFiles'));
     return "";
   }
 
@@ -23,4 +24,9 @@ export async function getGitDiff(): Promise<string> {
     .join('\n');
 
   return filteredDiff.trim();
+}
+
+export async function getGitBranch(): Promise<string> {
+  const git = simpleGit(vscode.workspace.workspaceFolders?.[0]?.uri.fsPath || '');
+  return (await git.branch()).current;
 }
