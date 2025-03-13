@@ -1,4 +1,4 @@
-# VSCode Commit Assistant Extension
+![image](https://github.com/user-attachments/assets/37eab622-9bf5-4540-ab60-fe8fbe7c961e)# VSCode Commit Assistant Extension
 
 La extensión **Commit Assistant** de VSCode permite una gestión eficiente de tus commits y un flujo de trabajo más ágil. Con soporte multilingüe, opciones de ofuscación de código y la integración con varios asistentes como Copilot y Gemini, esta extensión está diseñada para mejorar tu productividad y privacidad.
 
@@ -56,14 +56,20 @@ Una vez instalada la extensión, sigue estos pasos para empezar:
 
 1. Abre tu proyecto en VSCode.
 2. Abre la paleta de comandos (`Ctrl+Shift+P`).
-3. Escribe `Commit Assistant` para acceder a las opciones disponibles.
+3. Escribe `Commit Suggestion` para acceder a las opciones disponibles.
 
 Desde allí podrás:
 - Ver los commits sugeridos.
-- Cambiar entre los asistentes AI (Copilot, GPT-4O, Gemini).
+- Cambiar entre los asistentes AI (copilot+gpt-4o, copilot+gpt-4o-mini, gemini).
 - Configurar los niveles de ofuscación y lista de palabras.
 - Definir el idioma para los commits.
 - Activar o desactivar la opción de auto-commit.
+
+| Asistente AI                | Velocidad  |
+|-----------------------------|------------|
+| **copilot + gpt-4o-mini**    | Más rápido |
+| **gemini**                   | Rápido     |
+| **copilot + gpt-4o**         | Lento      |
 
 ## Contribuciones
 
