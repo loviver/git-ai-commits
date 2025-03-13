@@ -1,21 +1,45 @@
-MIT License  
+GNU AFFERO GENERAL PUBLIC LICENSE
+                       Version 3, 19 November 2007
 
-Copyright (c) 2025  
+Copyright (C) <AÑO>  <TU NOMBRE O EL NOMBRE DE TU ORGANIZACIÓN>
+Copyright (C) <AÑO>  Free Software Foundation, Inc.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy  
-of this software and associated documentation files (the "Software"), to deal  
-in the Software without restriction, including without limitation the rights  
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell  
-copies of the Software, and to permit persons to whom the Software is  
-furnished to do so, subject to the following conditions:  
+La Licencia AGPL es una licencia de software libre diseñada para garantizar que los usuarios de un programa tengan la libertad de usar, modificar y compartir el software, pero también asegura que el código fuente modificado sea accesible a quienes lo utilicen a través de una red.
 
-The above copyright notice and this permission notice shall be included in all  
-copies or substantial portions of the Software.  
+Este programa es software libre: puede redistribuirse y/o modificarse bajo los términos de la Licencia Pública General Affero de GNU, versión 3, publicada por la Free Software Foundation.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR  
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,  
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE  
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER  
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,  
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN  
-THE SOFTWARE.
+Este programa se distribuye con la esperanza de que sea útil, pero SIN NINGUNA GARANTÍA; incluso sin la garantía implícita de COMERCIALIZACIÓN o IDONEIDAD PARA UN PROPÓSITO PARTICULAR. Vea la Licencia Pública General Affero de GNU para más detalles.
+
+Deberás haber recibido una copia de la Licencia Pública General Affero de GNU junto con este programa. Si no la has recibido, consulta http://www.gnu.org/licenses/.
+
+    0. Definiciones.
+
+    0.1 "Este programa" se refiere al software cuyo código fuente está bajo los términos de esta licencia.
+    0.2 "Modificar" significa hacer cambios en el código fuente, incluyendo pero no limitado a la traducción de este programa a otro lenguaje de programación, la adición de funcionalidades, o el cambio de la interfaz de usuario.
+
+    1. Condiciones de uso.
+
+    1.1 Para hacer uso del programa bajo los términos de esta licencia, no tienes que pagar nada. 
+    1.2 Puede usarse de cualquier manera, siempre que se cumpla lo siguiente:
+        1.2.1 Si modificas el programa y lo ejecutas para interactuar con usuarios a través de una red, debes poner el código fuente modificado a disposición de esos usuarios.
+        1.2.2 Cuando distribuyas el programa, ya sea modificado o sin modificar, debes proporcionar acceso al código fuente.
+    
+    2. Responsabilidad.
+
+    2.1 La distribución de software bajo la AGPL no te permite venderlo, aunque puedes vender el acceso al servicio que utiliza este software.
+    2.2 Se prohíbe la distribución del software sin los términos y condiciones de esta licencia.
+
+    3. Notificación de cambios.
+
+    3.1 Si modificas el software, debes marcar claramente las modificaciones realizadas en el código fuente y los archivos modificados.
+    3.2 También debes incluir una nota sobre la fecha de la última modificación.
+
+    4. Exención de responsabilidad.
+
+    4.1 Este software se distribuye con la esperanza de que sea útil, pero sin ninguna garantía, ni expresa ni implícita, incluida, pero no limitada a, las garantías de comerciabilidad o adecuación para un propósito en particular.
+
+    5. Finalización.
+
+    5.1 Si violas cualquiera de los términos de esta licencia, tu derecho a usar el software terminará automáticamente, aunque puedes obtener una nueva licencia por parte de la Free Software Foundation.
+
+Fin de la Licencia.
