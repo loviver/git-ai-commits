@@ -5,6 +5,8 @@ import GeminiAI from './GeminiAI';
 import { getGitBranch, getGitDiff } from './gitService';
 import { sanitizeDiff } from './sanitizeService';
 
+import prompt from '../prompt.txt';
+
 import AppConfig from './app-config';
 import { i18n } from "./i18n";
 
@@ -42,10 +44,8 @@ export async function generateCommitMessages(context: vscode.ExtensionContext): 
 
   const config = vscode.workspace.getConfiguration(AppConfig.name);
   const langCommits = config.get<string>("lang") || "english";
-  const promptPath = path.join(context.extensionPath, 'dist', 'prompt.txt');
 
-  let prompt = fs.readFileSync(promptPath, 'utf-8');
-  prompt = prompt.replace(`{lang}`, langCommits);
+  let improvedPrompt = prompt.replace(`{lang}`, langCommits);
 
   const response = await agentAI.askQuestion(`
     Task:  
@@ -58,7 +58,7 @@ export async function generateCommitMessages(context: vscode.ExtensionContext): 
     ${diff}
     \`\`\`
   `, {
-    system: prompt,
+    system: improvedPrompt,
   });
 
   return response || [];

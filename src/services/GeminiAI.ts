@@ -43,8 +43,6 @@ class GeminiAI {
       ]
     };
 
-    // console.log(`requestBody: ${JSON.stringify(requestBody)}`);
-
     console.log(`geminirequest time: ${new Date().toISOString()}`);
 
     try {
@@ -61,8 +59,6 @@ class GeminiAI {
       }
 
       const data: GeminiResponse = (await response.json()) as GeminiResponse;
-
-      //console.log( JSON.stringify(data, null, 2) );
 
       let res = data.candidates[0].content.parts[0].text;
 

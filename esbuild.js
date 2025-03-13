@@ -1,6 +1,8 @@
 const esbuild = require("esbuild");
 const path = require("path");
 const fs = require("fs");
+import textPlugin from "esbuild-plugin-text";
+
 const production = process.argv.includes('--production');
 const watch = process.argv.includes('--watch');
 
@@ -53,6 +55,7 @@ async function main() {
 		plugins: [
 			/* add to the end of plugins array */
 			esbuildProblemMatcherPlugin,
+			textPlugin(),
 		],
 	});
 	if (watch) {
@@ -60,7 +63,7 @@ async function main() {
 	} else {
 		await ctx.rebuild();
 		await ctx.dispose();
-		copyPromptFile();
+		//copyPromptFile();
 	}
 }
 
