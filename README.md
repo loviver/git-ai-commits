@@ -75,9 +75,6 @@ Desde allí podrás:
 
 Si deseas contribuir a esta extensión, ¡serás bienvenido! Puedes abrir un **issue** o enviar un **pull request** con tus cambios.
 
-## Licencia
-
-Distribuido bajo la Licencia MIT. Ver el archivo [LICENSE](LICENSE) para más detalles.
 
 
 
