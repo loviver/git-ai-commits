@@ -1,7 +1,6 @@
 const esbuild = require("esbuild");
 const path = require("path");
 const fs = require("fs");
-import textPlugin from "esbuild-plugin-text";
 
 const production = process.argv.includes('--production');
 const watch = process.argv.includes('--watch');
@@ -52,10 +51,12 @@ async function main() {
 		outfile: 'dist/extension.js',
 		external: ['vscode'],
 		logLevel: 'silent',
+		loader: {
+			'.txt': 'text'
+		},
 		plugins: [
 			/* add to the end of plugins array */
-			esbuildProblemMatcherPlugin,
-			textPlugin(),
+			esbuildProblemMatcherPlugin
 		],
 	});
 	if (watch) {

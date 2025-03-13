@@ -18,6 +18,33 @@
   "activationEvents": [],
   "main": "./dist/extension.js",
   "contributes": {
+    "chatParticipants": [
+      {
+        "id": "git-ai-commits",
+        "name": "git-ai-commits",
+        "description": "AI-powered development assistant",
+        "isSticky": true
+      }
+    ],
+    "languageModelTools": [
+      {
+        "name": "git-ai-commits",
+        "displayName": "git-ai-commits",
+        "canBeReferencedInPrompt": true,
+        "toolReferenceName": "git-ai-commits",
+        "icon": "$(files)",
+        "tags": [
+          "ai",
+          "commit",
+          "message"
+        ],
+        "userDescription": "AI-powered development assistant",
+        "modelDescription": "AI-powered development assistant",
+        "inputSchema": {
+          "type": "string"
+        }
+      }
+    ],
     "commands": [
       {
         "command": "git-ai-commits.requestSuggestions",
@@ -35,11 +62,21 @@
     "configuration": {
       "title": "Git AI Commits",
       "properties": {
+        "git-ai-commits.aiProvider": {
+          "type": "string",
+          "enum": [
+            "copilot+gpt-4o",
+            "copilot+gpt-4o-mini",
+            "gemini"
+          ],
+          "default": "copilot+gpt-4o-mini",
+          "description": "Choose AI provider for commit message generation."
+        },
         "git-ai-commits.apiKey": {
           "type": "string",
           "default": "",
-          "description": "API Key para autenticarse con Gemini AI",
-          "scope": "global"
+          "description": "API Key for Gemini (required if using Gemini).",
+          "when": "git-ai-commits.aiProvider == 'gemini'"
         },
         "git-ai-commits.autoCommit": {
           "type": "boolean",
@@ -49,15 +86,31 @@
         },
         "git-ai-commits.obfuscationLevel": {
           "type": "string",
-          "enum": ["low", "medium", "high"],
+          "enum": [
+            "low",
+            "medium",
+            "high"
+          ],
           "default": "medium",
-          "description": "Define el nivel de ofuscación para los cambios en el código."
+          "description": "Specifies the level of code obfuscation applied to changes."
         },
         "git-ai-commits.lang": {
           "type": "string",
-          "enum": ["spanish", "english"],
+          "enum": [
+            "arabic",
+            "chinese",
+            "english",
+            "french",
+            "german",
+            "italian",
+            "japanese",
+            "korean",
+            "portuguese",
+            "russian",
+            "spanish"
+          ],
           "default": "english",
-          "description": "Define el idioma en el que se generarán los commits."
+          "description": "Sets the language for commit message generation."
         },
         "git-ai-commits.obfuscateWords": {
           "type": "array",
@@ -65,7 +118,7 @@
             "type": "string"
           },
           "default": [],
-          "description": "Lista de palabras que serán ofuscadas en los commits generados.",
+          "description": "List of words to be obfuscated in generated commits.",
           "scope": "global"
         }
       }
@@ -74,11 +127,9 @@
   "scripts": {
     "vscode:prepublish": "yarn run package",
     "compile": "yarn run check-types && yarn run lint && node esbuild.js",
-    
     "watch-dev": "npm-run-all -p watch:esbuild watch:extension",
     "watch:esbuild": "node esbuild.js --watch",
     "watch:extension": "node installExtension.js --watch",
-
     "watch": "npm-run-all -p watch:* watch:extension",
     "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
     "watch-tests": "tsc -p . -w --outDir out",
@@ -90,6 +141,7 @@
     "test": "vscode-test"
   },
   "devDependencies": {
+    "@types/axios": "^0.9.36",
     "@types/mocha": "^10.0.10",
     "@types/node": "20.x",
     "@types/vscode": "^1.98.0",
@@ -104,6 +156,7 @@
     "typescript": "^5.7.3"
   },
   "dependencies": {
+    "axios": "^1.8.3",
     "simple-git": "^3.27.0"
   }
 }

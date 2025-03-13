@@ -8,6 +8,7 @@ interface ExtensionConfig {
   description: string;
   repository: string;
   contributes: any;
+  defaultAiModel: string;
 }
 
 const config: ExtensionConfig = {
@@ -18,6 +19,7 @@ const config: ExtensionConfig = {
   description: packageJson.description,
   repository: packageJson.repository?.url || "",
   contributes: packageJson.contributes || {},
+  defaultAiModel: packageJson.contributes.configuration.properties['git-ai-commits.aiProvider'].default
 };
 
 export default config;

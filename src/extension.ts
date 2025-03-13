@@ -3,16 +3,41 @@ import simpleGit from 'simple-git';
 import { generateCommitMessages } from './services/commitService';
 import { i18n } from './services/i18n';
 
-export function activate(context: vscode.ExtensionContext) {
-  context.subscriptions.push(
-    vscode.commands.registerCommand('git-ai-commits.requestSuggestions', () => requestCommitSuggestions(context)),
+export async function activate(
+  extensionContext: vscode.ExtensionContext,
+  request: vscode.ChatRequest,
+  chatContext: vscode.ChatContext,
+  stream: vscode.ChatResponseStream,
+  token: vscode.CancellationToken
+) {
+
+  // const getRegister = await agentAI.getChatParticipant(context, request, chatContext, stream, token);
+
+  const commands = [
+    vscode.commands.registerCommand('git-ai-commits.requestSuggestions', async () => {
+      return requestCommitSuggestions(extensionContext, request, chatContext, stream, token);
+    }),
     vscode.commands.registerCommand('git-ai-commits.openSettings', () => openExtensionSettings())
-  );
+  ];
+
+  extensionContext.subscriptions.push(...commands);
 }
 
-async function requestCommitSuggestions(context: vscode.ExtensionContext) {
+async function requestCommitSuggestions(
+  extensionContext: vscode.ExtensionContext,
+  request: vscode.ChatRequest,
+  chatContext: vscode.ChatContext,
+  stream: vscode.ChatResponseStream,
+  token: vscode.CancellationToken
+) {
   try {
-    const commitMessages = await generateCommitMessages(context);
+    const commitMessages = await generateCommitMessages(
+      extensionContext,
+      request,
+      chatContext,
+      stream,
+      token
+    );
 
     if(!commitMessages) {
       return;

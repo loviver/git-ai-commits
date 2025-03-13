@@ -1,37 +1,23 @@
 import * as vscode from 'vscode';
-import fs from 'fs';
-import path from 'path';
-import GeminiAI from './GeminiAI';
 import { getGitBranch, getGitDiff } from './gitService';
 import { sanitizeDiff } from './sanitizeService';
 
 import prompt from '../prompt.txt';
 
 import AppConfig from './app-config';
-import { i18n } from "./i18n";
+import { AgentManager } from './ai-agent';
 
-let agentAI: GeminiAI | null = null;
+let agentManager: AgentManager = new AgentManager();
 
-function initializeAgent() {
-  const config = vscode.workspace.getConfiguration(AppConfig.name);
-  const apiKey = config.get<string>("apiKey") || "";
+export async function generateCommitMessages(
+  extensionContext: vscode.ExtensionContext,
+  request?: vscode.ChatRequest, 
+  chatContext?: vscode.ChatContext, 
+  stream?: vscode.ChatResponseStream, 
+  token?: vscode.CancellationToken
+): Promise<string[] | null> {
 
-  if (!apiKey) {
-    vscode.window.showErrorMessage(i18n.t("error.noApiKey", { key: AppConfig.name }));
-    return false;
-  }
-  agentAI = new GeminiAI(apiKey);
-  return true;
-}
-
-export async function generateCommitMessages(context: vscode.ExtensionContext): Promise<string[] | null> {
-  if (!agentAI) {
-    initializeAgent();
-  }
-
-  if (!agentAI) {
-    return null;
-  }
+  agentManager.initializeAgent();
 
   const branchName = await getGitBranch();
   let diff = await getGitDiff();
@@ -47,19 +33,27 @@ export async function generateCommitMessages(context: vscode.ExtensionContext): 
 
   let improvedPrompt = prompt.replace(`{lang}`, langCommits);
 
-  const response = await agentAI.askQuestion(`
-    Task:  
-      - Analyze the following diff  
-
-    Context:  
-      - You are on the branch (${branchName})  
-
+  const response = await agentManager.askQuestion(
+    `Task:
+      - Analyze the following diff
+  
+    Context:
+      - You are on the branch (${branchName})
+  
     \`\`\`
     ${diff}
     \`\`\`
-  `, {
-    system: improvedPrompt,
-  });
+    `,
+    {
+      system: improvedPrompt
+    },
+    extensionContext
+  );
+  
+
+  if(response === null) {
+    return null;
+  }
 
   return response || [];
 }
