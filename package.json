@@ -3,10 +3,11 @@
   "publisher": "loviver",
   "displayName": "git-ai-commits",
   "description": "Suggest commits with AIs",
-  "version": "0.0.1",
+  "version": "1.0.1",
   "engines": {
     "vscode": "^1.98.0"
   },
+  "icon": "images/logo.png",
   "repository": {
     "type": "git",
     "url": "git branch -M main"
@@ -51,6 +52,12 @@
           "enum": ["low", "medium", "high"],
           "default": "medium",
           "description": "Define el nivel de ofuscación para los cambios en el código."
+        },
+        "gitAiCommits.lang": {
+          "type": "string",
+          "enum": ["spanish", "english"],
+          "default": "english",
+          "description": "Define el idioma en el que se generarán los commits."
         },
         "gitAiCommits.obfuscateWords": {
           "type": "array",

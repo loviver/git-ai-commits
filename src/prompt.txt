@@ -7,7 +7,7 @@ Contexto importante:
    - Enfócate únicamente en la funcionalidad del cambio.
 
 Reglas para los mensajes:
-   - Idioma: Los mensajes deben estar escritos en inglés.
+   - Idioma: Los mensajes deben estar escritos en {lang}.
    - Claridad: Deben ser concisos y describir claramente el cambio realizado.
    - Estilo: Usa emojis adecuados según el tipo de cambio. Aquí tienes una lista estructurada por categoría:
   
