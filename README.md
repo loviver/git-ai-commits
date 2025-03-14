@@ -1,10 +1,10 @@
-<<<<<<< HEAD
-# VSCode Commit Assistant Extension
-=======
 # VSCode Commit Assistant Extension (git-ai-commits)
->>>>>>> f0514503f423575e12ecaa02e6bb5eef6984e222
 
-La extensión **Commit Assistant** de VSCode permite una gestión eficiente de tus commits y un flujo de trabajo más ágil. Con soporte multilingüe, opciones de ofuscación de código y la integración con varios asistentes como Copilot y Gemini, esta extensión está diseñada para mejorar tu productividad y privacidad.
+![image](https://github.com/user-attachments/assets/9bd8ee87-6858-46ab-aaa6-06ca117001d3)
+
+![image](https://github.com/user-attachments/assets/0da8c2b1-089d-4097-ae5d-af595709cd29)
+
+La extensión **git-ai-commits** de VSCode permite una gestión eficiente de tus commits y un flujo de trabajo más ágil. Con soporte multilingüe, opciones de ofuscación de código y la integración con varios asistentes como Copilot y Gemini, esta extensión está diseñada para mejorar tu productividad y privacidad.
 
 ## Características
 
@@ -111,10 +111,3 @@ Desde allí podrás:
 ## Contribuciones
 
 Si deseas contribuir a esta extensión, ¡serás bienvenido! Puedes abrir un **issue** o enviar un **pull request** con tus cambios.
-
-
-
-
-
-![image](https://github.com/user-attachments/assets/9bd8ee87-6858-46ab-aaa6-06ca117001d3)
->>>>>>> f0514503f423575e12ecaa02e6bb5eef6984e222
