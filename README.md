@@ -46,13 +46,12 @@ La extensión **git-ai-commits** de VSCode permite una gestión eficiente de tus
 
 ### 7. **Interfaz de Usuario en Inglés y Español**
 - La interfaz de la extensión se ajusta al idioma de tu **Visual Studio Code**. Se ofrece soporte tanto en **Inglés** como en **Español**.
-<<<<<<< HEAD
 
 ## Instalación
 
 1. Abre Visual Studio Code.
 2. Dirígete a la sección de **Extensiones** (o usa el atajo `Ctrl+Shift+X`).
-3. Busca **Commit Assistant**.
+3. Busca **git-ai-commits**.
 4. Haz clic en **Instalar**.
 
 ## Uso
