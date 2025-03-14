@@ -292,7 +292,6 @@ const fragmentedStream = (stream) => {
 
 	if(findMids) {
 		const containMids = Object.values(findMids)[1];
-
 		const mids = Object.values(containMids);
 
 		for(const mid of mids) {
