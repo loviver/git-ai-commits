@@ -50,8 +50,6 @@ export class AgentManager {
         try {
           return await this.agentAI?.askQuestion(prompt, customContext, extensionContext, providerFamily ?? providerName);
         } catch (error: any) {
-          console.log(error.response?.data)
-
           const errorMessage = error.response?.data?.error?.message || error.message || "Error no clasificado";
 
           if(errorMessage.includes("exceeds the limit of")) {

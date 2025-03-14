@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 import AppConfig from './app-config';
 
-export function sanitizeDiff(diff: string): string {
+export function codeOfuscator(diff: string): string {
   const config = vscode.workspace.getConfiguration(AppConfig.name);
   const obfuscationLevel = config.get<string>("obfuscationLevel") ?? "medium";
   const obfuscateWords = config.get<string[]>("obfuscateWords") ?? [];
@@ -45,7 +45,7 @@ function obfuscateHigh(diff: string): string {
 }
 
 function obfuscateCustomWords(diff: string, words: string[]): string {
-  if (words.length === 0) return diff;
+  if (words.length === 0) { return diff };
   const obfuscateRegex = new RegExp(`\\b(${words.join("|")})\\b`, "gi");
   return diff.replace(obfuscateRegex, 'PLACEHOLDER_VALUE');
 }

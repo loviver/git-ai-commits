@@ -1,10 +1,10 @@
 import * as vscode from 'vscode';
-import { getGitBranch, getGitDiff } from './gitService';
-import { sanitizeDiff } from './sanitizeService';
+import { getGitBranch, getGitDiff } from './git-service';
+import { codeOfuscator } from './ofuscator-service';
 
-import prompt from '../prompts/general_prompt_commits.txt';
-import style_conventional_prompt from '../prompts/style_conventional.txt';
-import style_emojis_prompt from '../prompts/style_emojis.txt';
+import generalCommitsPrompt from '../prompts/prompt-commits.txt';
+import styleConventionalPrompt from '../prompts/style-conventional.txt';
+import styleEmojisPrompt from '../prompts/style-emojis.txt';
 
 import AppConfig from './app-config';
 import { AgentManager } from './ai-agent';
@@ -29,7 +29,7 @@ export async function generateCommitMessages(
     return [];
   }
 
-  diff = sanitizeDiff(diff);
+  diff = codeOfuscator(diff);
 
   const config = vscode.workspace.getConfiguration(AppConfig.name);
   const langCommits = config.get<string>("lang") || "english";
@@ -37,13 +37,11 @@ export async function generateCommitMessages(
 
   let style = getCommitStyle(convention, config);
 
-  const improvedPrompt = replacePlaceholders(prompt, {
+  const improvedPrompt = replacePlaceholders(generalCommitsPrompt, {
     lang: langCommits.trim(),
     style: style.trim(),
     style_name: convention.trim()
   });
-
-  console.log(`prompt`, improvedPrompt, convention);
 
   const response = await agentManager.askQuestion(
     `Task:
@@ -73,10 +71,11 @@ export async function generateCommitMessages(
 function getCommitStyle(convention: string, config: vscode.WorkspaceConfiguration): string {
   switch (convention) {
     case 'gitmoji':
-      return style_emojis_prompt;
+      return styleEmojisPrompt;
     case 'custom':
-      return config.get<string>('customConvention', '{type}: {message}');
+      const custom = config.get<string>('customConvention', '{type}: {message}');
+      return custom;
     default:
-      return style_conventional_prompt;
+      return styleConventionalPrompt;
   }
 }

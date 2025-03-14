@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 import simpleGit from 'simple-git';
-import { generateCommitMessages } from './services/commitService';
+import { generateCommitMessages } from './services/commit-service';
 import { i18n } from './services/i18n';
 
 export async function activate(
