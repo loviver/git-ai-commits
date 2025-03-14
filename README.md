@@ -1,33 +1,75 @@
-# Git AI Commits
+# VSCode Commit Assistant Extension
 
-Git AI Commits es una extensión de VS Code que utiliza inteligencia artificial para analizar los cambios en tu repositorio y generar mensajes de commit relevantes. Ahora incluye ofuscación del código y mejoras en la seguridad.
+La extensión **Commit Assistant** de VSCode permite una gestión eficiente de tus commits y un flujo de trabajo más ágil. Con soporte multilingüe, opciones de ofuscación de código y la integración con varios asistentes como Copilot y Gemini, esta extensión está diseñada para mejorar tu productividad y privacidad.
 
-## 🚀 Características
+## Características
 
-- 📜 **Análisis inteligente de cambios en Git**: Obtiene el `git diff` de los archivos modificados.
-- 🤖 **Generación de commits con IA**: Usa un modelo de IA para sugerir mensajes de commit basados en los cambios.
-- 🔒 **Ofuscación opcional**: Protege información sensible antes de generar commits.
-- 🛠 **Integración con VS Code**: Se ejecuta como un comando dentro del editor.
+### 1. **Acceso a Commits Sugeridos**
+- Accede fácilmente a una lista de **5 commits sugeridos** basados en el estado actual del **stage** de tu código.
+- Los commits sugeridos se generan automáticamente, lo que te ayuda a evitar la necesidad de escribir mensajes manualmente.
 
-### 🔹 Uso
+### 2. **Cambio de Asistentes AI**
+- **Switch entre modelos de AI**:
+  - **Copilot+GPT-4O-Mini**
+  - **Copilot+GPT-4O**
+  - **Gemini**
+- Personaliza el asistente con el que deseas interactuar para obtener sugerencias sobre tu código.
 
-Ejecuta el comando desde la paleta de comandos (`Ctrl+Shift+P` en Windows/Linux, `Cmd+Shift+P` en macOS):
+### 3. **Ofuscación de Código**
+- Permite **definir el nivel de ofuscación** de código. Mientras más alto sea el nivel de ofuscación (Low, Medium, High), menos datos se comparten con el asistente para obtener una opinión.
+- Los niveles de ofuscación más altos permiten que el asistente se enfoque solo en la funcionalidad del código, sin revelar detalles sensibles.
 
-```sh
-Generate AI-Powered Commit Suggestions
-```
+### 4. **Lista de Palabras a Ofuscar**
+- Define una lista personalizada de palabras clave que deseas ofuscar para mayor privacidad y seguridad.
 
-La extensión analizará los cambios en `stage` y sugerirá 5 commits basado en IA. 🚀
+### 5. **Soporte Multilingüe para Commits**
+- Genera automáticamente los mensajes de commit en los siguientes idiomas:
+  - **Arabic**
+  - **Chinese**
+  - **English**
+  - **French**
+  - **German**
+  - **Italian**
+  - **Japanese**
+  - **Korean**
+  - **Portuguese**
+  - **Russian**
+  - **Spanish**
 
-## ⚙️ Configuración
+### 6. **Auto Commit**
+- Opción para **auto-commit**: Al seleccionar el commit preferido, se realizará el commit automáticamente.
+- Si no se activa la opción de auto-commit, al seleccionar el commit, se copiará al **portapapeles** para que lo uses manualmente.
 
-Puedes personalizar el comportamiento de la extensión con las siguientes opciones en `settings.json`:
+### 7. **Interfaz de Usuario en Inglés y Español**
+- La interfaz de la extensión se ajusta al idioma de tu **Visual Studio Code**. Se ofrece soporte tanto en **Inglés** como en **Español**.
 
-```json
-{
-  "gitAiCommits.apiKey": "", // API Key para autenticarse con Gemini AI
-  "gitAiCommits.autoCommit": false, // Habilitar auto-commit
-  "gitAiCommits.obfuscationLevel": "medium", // Nivel de ofuscación (low, medium, high)
-  "gitAiCommits.obfuscateWords": [] // Lista de palabras a ofuscar en los commits
-}
-```
+## Instalación
+
+1. Abre Visual Studio Code.
+2. Dirígete a la sección de **Extensiones** (o usa el atajo `Ctrl+Shift+X`).
+3. Busca **Commit Assistant**.
+4. Haz clic en **Instalar**.
+
+## Uso
+
+Una vez instalada la extensión, sigue estos pasos para empezar:
+
+1. Abre tu proyecto en VSCode.
+2. Abre la paleta de comandos (`Ctrl+Shift+P`).
+3. Escribe `Commit Assistant` para acceder a las opciones disponibles.
+
+Desde allí podrás:
+- Ver los commits sugeridos.
+- Cambiar entre los asistentes AI (Copilot, GPT-4O, Gemini).
+- Configurar los niveles de ofuscación y lista de palabras.
+- Definir el idioma para los commits.
+- Activar o desactivar la opción de auto-commit.
+
+## Contribuciones
+
+Si deseas contribuir a esta extensión, ¡serás bienvenido! Puedes abrir un **issue** o enviar un **pull request** con tus cambios.
+
+## Licencia
+
+Distribuido bajo la Licencia MIT. Ver el archivo [LICENSE](LICENSE) para más detalles.
+
