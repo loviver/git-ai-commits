@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # VSCode Commit Assistant Extension
+=======
+# VSCode Commit Assistant Extension (git-ai-commits)
+>>>>>>> f0514503f423575e12ecaa02e6bb5eef6984e222
 
 La extensión **Commit Assistant** de VSCode permite una gestión eficiente de tus commits y un flujo de trabajo más ágil. Con soporte multilingüe, opciones de ofuscación de código y la integración con varios asistentes como Copilot y Gemini, esta extensión está diseñada para mejorar tu productividad y privacidad.
 
@@ -42,6 +46,7 @@ La extensión **Commit Assistant** de VSCode permite una gestión eficiente de t
 
 ### 7. **Interfaz de Usuario en Inglés y Español**
 - La interfaz de la extensión se ajusta al idioma de tu **Visual Studio Code**. Se ofrece soporte tanto en **Inglés** como en **Español**.
+<<<<<<< HEAD
 
 ## Instalación
 
@@ -73,3 +78,43 @@ Si deseas contribuir a esta extensión, ¡serás bienvenido! Puedes abrir un **i
 
 Distribuido bajo la Licencia MIT. Ver el archivo [LICENSE](LICENSE) para más detalles.
 
+=======
+
+## Instalación
+
+1. Abre Visual Studio Code.
+2. Dirígete a la sección de **Extensiones** (o usa el atajo `Ctrl+Shift+X`).
+3. Busca **Commit Assistant**.
+4. Haz clic en **Instalar**.
+
+## Uso
+
+Una vez instalada la extensión, sigue estos pasos para empezar:
+
+1. Abre tu proyecto en VSCode.
+2. Abre la paleta de comandos (`Ctrl+Shift+P`).
+3. Escribe `Commit Suggestion` para acceder a las opciones disponibles.
+
+Desde allí podrás:
+- Ver los commits sugeridos.
+- Cambiar entre los asistentes AI (copilot+gpt-4o, copilot+gpt-4o-mini, gemini).
+- Configurar los niveles de ofuscación y lista de palabras.
+- Definir el idioma para los commits.
+- Activar o desactivar la opción de auto-commit.
+
+| Asistente AI                | Velocidad  |
+|-----------------------------|------------|
+| **copilot + gpt-4o-mini**    | Más rápido |
+| **gemini**                   | Rápido     |
+| **copilot + gpt-4o**         | Lento      |
+
+## Contribuciones
+
+Si deseas contribuir a esta extensión, ¡serás bienvenido! Puedes abrir un **issue** o enviar un **pull request** con tus cambios.
+
+
+
+
+
+![image](https://github.com/user-attachments/assets/9bd8ee87-6858-46ab-aaa6-06ca117001d3)
+>>>>>>> f0514503f423575e12ecaa02e6bb5eef6984e222

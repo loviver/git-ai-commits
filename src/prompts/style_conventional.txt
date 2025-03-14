@@ -1,0 +1,9 @@
+Use conventional commit prefixes:
+- `feat:` Introduce a new feature.
+- `fix:` Resolve a bug.
+- `refactor:` Improve code without changing functionality.
+- `chore:` Update build tasks or dependencies.
+- `docs:` Modify documentation.
+- `perf:` Optimize performance.
+- `style:` Improve formatting without affecting logic.
+- `test:` Add or update tests.

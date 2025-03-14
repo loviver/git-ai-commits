@@ -1,7 +1,7 @@
 {
   "error.noApiKey": "No se encontró una clave API. Por favor, configura ${key} en los ajustes.",
   "error.commit.generationFailed": "No se pudieron generar mensajes de commit. Intenta de nuevo.",
-  "error.commit.failed": "Error al hacer commit: ${error}",
+  "error.commit.failed": "Error al hacer commit: ${commit} - ${error}",
   "error.suggestions.generationFailed": "Error generando sugerencias: ${error}",
   "error.extension.configOpenFailed": "No se pudo abrir la configuración de la extensión: ${error}",
 

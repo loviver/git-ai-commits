@@ -1,7 +1,7 @@
 {
   "error.noApiKey": "No API key found. Please set ${key} in the settings.",
   "error.commit.generationFailed": "Commit messages could not be generated. Please try again.",
-  "error.commit.failed": "Error committing: ${error}",
+  "error.commit.failed": "Error committing: ${commit} - ${error}",
   "error.suggestions.generationFailed": "Error generating suggestions: ${error}",
   "error.extension.configOpenFailed": "Could not open extension settings: ${error}",
 

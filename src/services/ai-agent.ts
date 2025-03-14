@@ -15,14 +15,14 @@ export class AgentManager {
     
     this.currentProvider = config.get<string>("aiProvider") || AppConfig.defaultAiModel;
 
-    const apiKey = !apiParamKey ? (config.get<string>("apiKey") || null) : apiParamKey;
+    const apiKey = !apiParamKey ? (config.get<string>("apiKey") || undefined) : apiParamKey;
 
-    if(!apiKey) {
+    if(this.currentProvider === 'gemini' && !apiKey) {
       vscode.window.showErrorMessage(i18n.t("error.noApiKey", { key: AppConfig.name }));
       return false;
     }
 
-    this.agentAI = this.currentProvider === "gemini" ? new GeminiAI(apiKey) : new CopilotAI(apiKey);
+    this.agentAI = this.currentProvider === "gemini" ? new GeminiAI(apiKey) : new CopilotAI();
     return true;
   }
 

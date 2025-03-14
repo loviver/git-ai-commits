@@ -10,41 +10,15 @@
   "icon": "images/logo.png",
   "repository": {
     "type": "git",
-    "url": "git branch -M main"
+    "url": "https://github.com/loviver/git-ai-commits"
   },
   "categories": [
-    "Other"
+    "AI",
+    "Programming Languages"
   ],
   "activationEvents": [],
   "main": "./dist/extension.js",
   "contributes": {
-    "chatParticipants": [
-      {
-        "id": "git-ai-commits",
-        "name": "git-ai-commits",
-        "description": "AI-powered development assistant",
-        "isSticky": true
-      }
-    ],
-    "languageModelTools": [
-      {
-        "name": "git-ai-commits",
-        "displayName": "git-ai-commits",
-        "canBeReferencedInPrompt": true,
-        "toolReferenceName": "git-ai-commits",
-        "icon": "$(files)",
-        "tags": [
-          "ai",
-          "commit",
-          "message"
-        ],
-        "userDescription": "AI-powered development assistant",
-        "modelDescription": "AI-powered development assistant",
-        "inputSchema": {
-          "type": "string"
-        }
-      }
-    ],
     "commands": [
       {
         "command": "git-ai-commits.requestSuggestions",
@@ -70,29 +44,7 @@
             "gemini"
           ],
           "default": "copilot+gpt-4o-mini",
-          "description": "Choose AI provider for commit message generation."
-        },
-        "git-ai-commits.apiKey": {
-          "type": "string",
-          "default": "",
-          "description": "API Key for Gemini (required if using Gemini).",
-          "when": "git-ai-commits.aiProvider == 'gemini'"
-        },
-        "git-ai-commits.autoCommit": {
-          "type": "boolean",
-          "default": false,
-          "description": "Allow Git AI Commits to automatically commit changes.",
-          "scope": "global"
-        },
-        "git-ai-commits.obfuscationLevel": {
-          "type": "string",
-          "enum": [
-            "low",
-            "medium",
-            "high"
-          ],
-          "default": "medium",
-          "description": "Specifies the level of code obfuscation applied to changes."
+          "description": "Choose the AI provider for commit message generation."
         },
         "git-ai-commits.lang": {
           "type": "string",
@@ -110,7 +62,29 @@
             "spanish"
           ],
           "default": "english",
-          "description": "Sets the language for commit message generation."
+          "description": "Sets the language for AI-generated commit messages."
+        },
+        "git-ai-commits.apiKey": {
+          "type": "string",
+          "default": "",
+          "description": "API Key for Gemini (required if using Gemini as AI provider).",
+          "when": "git-ai-commits.aiProvider == 'gemini'"
+        },
+        "git-ai-commits.autoCommit": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable automatic commits after generating a message.",
+          "scope": "global"
+        },
+        "git-ai-commits.obfuscationLevel": {
+          "type": "string",
+          "enum": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "default": "medium",
+          "description": "Specifies the level of obfuscation applied to commit messages."
         },
         "git-ai-commits.obfuscateWords": {
           "type": "array",
@@ -120,6 +94,17 @@
           "default": [],
           "description": "List of words to be obfuscated in generated commits.",
           "scope": "global"
+        },
+        "git-ai-commits.convention": {
+          "type": "string",
+          "default": "conventional",
+          "enum": ["conventional", "gitmoji", "custom"],
+          "description": "Select the commit message convention."
+        },
+        "git-ai-commits.customConvention": {
+          "type": "string",
+          "default": "{type}: {message}",
+          "description": "Define your own commit convention using {type}, {message}, {scope}."
         }
       }
     }

@@ -10,9 +10,6 @@ export async function activate(
   stream: vscode.ChatResponseStream,
   token: vscode.CancellationToken
 ) {
-
-  // const getRegister = await agentAI.getChatParticipant(context, request, chatContext, stream, token);
-
   const commands = [
     vscode.commands.registerCommand('git-ai-commits.requestSuggestions', async () => {
       return requestCommitSuggestions(extensionContext, request, chatContext, stream, token);
@@ -63,8 +60,8 @@ async function requestCommitSuggestions(
         try {
           await git.commit(selectedMessage);
           vscode.window.showInformationMessage(i18n.t('success.commit.confirmed', { error: selectedMessage }));
-        } catch (error) {
-          vscode.window.showErrorMessage(i18n.t('error.commit.failed', { error: selectedMessage }));
+        } catch (error: any) {
+          vscode.window.showErrorMessage(i18n.t('error.commit.failed', { commit: selectedMessage, error: error.message ?? error }));
         }
       } else {
         await vscode.env.clipboard.writeText(selectedMessage);

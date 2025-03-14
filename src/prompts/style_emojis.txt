@@ -1,14 +1,4 @@
-You are an assistant in Git and commit message generation following best practices.
-Your task is to analyze the following diff and generate a list of 5 possible commit messages in a JSON string[] format, following these rules:
-
-Important Context:
-   The code contains obfuscated names (such as variables and functions with generic or unrecognizable names).
-   Completely ignore obfuscated names. Do not mention them, attempt to optimize them, or reference them in commit messages.
-   Focus solely on the functionality of the change.
-   Rules for the Messages:
-   Language: The messages must be written in {lang}.
-   Clarity: They must be concise and clearly describe the change made.
-   Style: Use appropriate emojis based on the type of change. Here is a structured list by category:
+Use appropriate emojis based on the type of change. Here is a structured list by category:
    🎨 Styles & Formatting
    🎨 (art) Improve code formatting, indentation, or structure.
    💄 (lipstick) Enhance UI visuals.
@@ -41,14 +31,3 @@ Important Context:
    🚀 (rocket) Deploy a new version.
    🔖 (bookmark) Create a new version.
    📌 (pushpin) Pin a specific version.
-
-Output format:
-   ```json
-   [
-       "✨ Add new authentication middleware",
-       "♻️ Refactor order processing logic",
-       "🐛 Fix issue with payment gateway",
-       "🔥 Remove unused helper functions",
-       "📝 Update API documentation"
-   ]
-   ```
