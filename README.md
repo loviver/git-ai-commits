@@ -1,112 +1,79 @@
-# VSCode Commit Assistant Extension (git-ai-commits)
+# 🚀 Git AI Commits - Smart Commit Messages with AI
 
 ![image](https://github.com/user-attachments/assets/9bd8ee87-6858-46ab-aaa6-06ca117001d3)
 
 ![image](https://github.com/user-attachments/assets/0da8c2b1-089d-4097-ae5d-af595709cd29)
 
-La extensión **git-ai-commits** de VSCode permite una gestión eficiente de tus commits y un flujo de trabajo más ágil. Con soporte multilingüe, opciones de ofuscación de código y la integración con varios asistentes como Copilot y Gemini, esta extensión está diseñada para mejorar tu productividad y privacidad.
+**Git AI Commits** supercharges your Git workflow by automatically generating intelligent commit messages based on your staged changes. Stop wasting time crafting the perfect commit message - let AI do the work for you!
 
-## Características
+## ✨ Key Features
 
-### 1. **Acceso a Commits Sugeridos**
-- Accede fácilmente a una lista de **5 commits sugeridos** basados en el estado actual del **stage** de tu código.
-- Los commits sugeridos se generan automáticamente, lo que te ayuda a evitar la necesidad de escribir mensajes manualmente.
+### 🧠 AI-Powered Commit Suggestions
+- Get **5 intelligent commit suggestions** based on your staged changes
+- **Focus-based suggestions**: Tell the AI what aspect of your changes to emphasize
+- Works with multiple AI assistants: **Copilot+GPT-4O**, **Copilot+GPT-4O-Mini**, and **Gemini**
 
-### 2. **Cambio de Asistentes AI**
-- **Switch entre modelos de AI**:
-  - **Copilot+GPT-4O-Mini**
-  - **Copilot+GPT-4O**
-  - **Gemini**
-- Personaliza el asistente con el que deseas interactuar para obtener sugerencias sobre tu código.
+### 🔒 Enhanced Privacy Options
+- **Three levels of code obfuscation** (Low, Medium, High) to protect sensitive information
+- **Custom word obfuscation**: Define specific keywords to mask before sending to AI
+- The higher the obfuscation level, the more privacy you maintain
 
-### 3. **Ofuscación de Código**
-- Permite **definir el nivel de ofuscación** de código. Mientras más alto sea el nivel de ofuscación (Low, Medium, High), menos datos se comparten con el asistente para obtener una opinión.
-- Los niveles de ofuscación más altos permiten que el asistente se enfoque solo en la funcionalidad del código, sin revelar detalles sensibles.
+### 🌍 Global Language Support
+- Generate commits in **11 languages**: Arabic, Chinese, English, French, German, Italian, Japanese, Korean, Portuguese, Russian, and Spanish
+- Perfect for international teams or when you need to write commits in a non-native language
 
-### 4. **Lista de Palabras a Ofuscar**
-- Define una lista personalizada de palabras clave que deseas ofuscar para mayor privacidad y seguridad.
+### 🎯 Commit Convention Support
+- Choose your preferred commit style: **gitmoji**, **conventional**, or **custom**
+- Define your own custom commit format for consistent messaging
 
-### 5. **Soporte Multilingüe para Commits**
-- Genera automáticamente los mensajes de commit en los siguientes idiomas:
-  - **Arabic**
-  - **Chinese**
-  - **English**
-  - **French**
-  - **German**
-  - **Italian**
-  - **Japanese**
-  - **Korean**
-  - **Portuguese**
-  - **Russian**
-  - **Spanish**
+### ⚡ Workflow Optimization
+- **Auto-commit option**: Automatically commit changes when selecting a suggestion
+- **Copy to clipboard**: Easily use suggestions in your manual workflow
+- **Dynamic prompt updates**: Receive improved prompts without extension updates (optional)
 
-### 6. **Auto Commit**
-- Opción para **auto-commit**: Al seleccionar el commit preferido, se realizará el commit automáticamente.
-- Si no se activa la opción de auto-commit, al seleccionar el commit, se copiará al **portapapeles** para que lo uses manualmente.
+### 🛠️ Customization
+- Configure your favorite AI assistant for optimal speed/quality balance
+- Multiple UI languages: English and Spanish interfaces based on your VSCode settings
 
-### 7. **Interfaz de Usuario en Inglés y Español**
-- La interfaz de la extensión se ajusta al idioma de tu **Visual Studio Code**. Se ofrece soporte tanto en **Inglés** como en **Español**.
+## 🔍 AI Assistant Comparison
 
-## Instalación
+| AI Assistant | Speed | Quality |
+|--------------|-------|---------|
+| Copilot + GPT-4O-Mini | Fastest | Good |
+| Gemini | Fast | Better |
+| Copilot + GPT-4O | Slower | Best |
 
-1. Abre Visual Studio Code.
-2. Dirígete a la sección de **Extensiones** (o usa el atajo `Ctrl+Shift+X`).
-3. Busca **git-ai-commits**.
-4. Haz clic en **Instalar**.
+## 🚀 Getting Started
 
-## Uso
+### Installation
+1. Open Visual Studio Code
+2. Go to Extensions (Ctrl+Shift+X)
+3. Search for **git-ai-commits**
+4. Click Install
 
-Una vez instalada la extensión, sigue estos pasos para empezar:
+### Basic Usage
+1. Stage your changes with Git
+2. Open Command Palette (Ctrl+Shift+P)
+3. Type "Commit Suggestion" to see available options
+4. Select from the generated commit suggestions
+5. Commit automatically or copy to clipboard
 
-1. Abre tu proyecto en VSCode.
-2. Abre la paleta de comandos (`Ctrl+Shift+P`).
-3. Escribe `Commit Assistant` para acceder a las opciones disponibles.
+### Advanced Usage
+- Use "Focus-based Suggestions" to guide the AI toward specific aspects of your changes
+- Configure obfuscation levels in settings for sensitive codebases
+- Set your preferred commit convention style
 
-Desde allí podrás:
-- Ver los commits sugeridos.
-- Cambiar entre los asistentes AI (Copilot, GPT-4O, Gemini).
-- Configurar los niveles de ofuscación y lista de palabras.
-- Definir el idioma para los commits.
-- Activar o desactivar la opción de auto-commit.
+## 📋 Latest Updates (v1.0.6)
 
-## Contribuciones
+- **Improved High-level obfuscation**: Maintains key information without compromising privacy
+- **Enhanced commit suggestion algorithm**: Dramatically improved accuracy and relevance
+- **Dynamic prompt updates**: Receive improved prompts without extension updates
+- **New focus-based suggestion command**: Guide the AI to generate suggestions aligned with your intentions
 
-Si deseas contribuir a esta extensión, ¡serás bienvenido! Puedes abrir un **issue** o enviar un **pull request** con tus cambios.
+## 🤝 Contributing
 
-## Licencia
+Have ideas to make this extension better? Contributions are welcome! Open an issue or submit a pull request with your improvements.
 
-Distribuido bajo la Licencia MIT. Ver el archivo [LICENSE](LICENSE) para más detalles.
+## 📄 License
 
-=======
-
-## Instalación
-
-1. Abre Visual Studio Code.
-2. Dirígete a la sección de **Extensiones** (o usa el atajo `Ctrl+Shift+X`).
-3. Busca **Commit Assistant**.
-4. Haz clic en **Instalar**.
-
-## Uso
-
-Una vez instalada la extensión, sigue estos pasos para empezar:
-
-1. Abre tu proyecto en VSCode.
-2. Abre la paleta de comandos (`Ctrl+Shift+P`).
-3. Escribe `Commit Suggestion` para acceder a las opciones disponibles.
-
-Desde allí podrás:
-- Ver los commits sugeridos.
-- Cambiar entre los asistentes AI (copilot+gpt-4o, copilot+gpt-4o-mini, gemini).
-- Configurar los niveles de ofuscación y lista de palabras.
-- Definir el idioma para los commits.
-- Activar o desactivar la opción de auto-commit.
-
-| Asistente AI                | Velocidad  |
-|-----------------------------|------------|
-| **copilot + gpt-4o-mini**    | Más rápido |
-| **gemini**                   | Rápido     |
-| **copilot + gpt-4o**         | Lento      |
-
-## Contribuciones
-
-Si deseas contribuir a esta extensión, ¡serás bienvenido! Puedes abrir un **issue** o enviar un **pull request** con tus cambios.
+Distributed under the MIT License. See [LICENSE](LICENSE) for more details.
