@@ -60,7 +60,7 @@ async function requestCommitSuggestions(
           const terminal = vscode.window.activeTerminal || vscode.window.createTerminal("Mi Terminal");
           
           if(terminal) {
-            terminal.sendText(`Commit confirmado: ${commit.commit} | Mensaje: ${selectedMessage}`);
+            terminal.sendText(`echo Commit confirmado: ${commit.commit} | Mensaje: ${selectedMessage}`);
           }
 
           vscode.window.showInformationMessage(i18n.t('success.commit.confirmed', { error: selectedMessage }));
