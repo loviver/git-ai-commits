@@ -65,8 +65,8 @@ async function requestCommitSuggestions(
           if (terminal) {
             terminal.sendText(
               process.platform === "win32"
-                ? `Write-Output "Commit confirmado: ${commitHash} | Mensaje: ${commitMessage}"`
-                : `echo "Commit confirmado: ${commitHash} | Mensaje: ${commitMessage}"`
+                ? `Write-Host "✅ Commit confirmado: ${commitHash} | Mensaje: ${commitMessage}"`
+                : `echo "✅ Commit confirmado: ${commitHash} | Mensaje: ${commitMessage}"`
             );
           }
 
