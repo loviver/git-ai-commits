@@ -12,7 +12,6 @@ export async function getGitDiff(): Promise<string> {
     .filter(file => file.length > 0);
 
   if (stagedFiles.length === 0) {
-    vscode.window.showErrorMessage(i18n.t('warning.noStagedFiles'));
     return "";
   }
 

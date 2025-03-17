@@ -3,15 +3,24 @@
   "publisher": "loviver",
   "displayName": "AI-Powered Git Commits",
   "description": "Suggest commits with AI's",
-  "version": "1.0.3",
+  "author": "loviver <@loviver>",
+  "version": "1.0.5",
   "engines": {
     "vscode": "^1.98.0"
   },
-  "icon": "images/logo.png",
+  "galleryBanner": {
+    "color": "#ffe04b",
+    "theme": "light"
+  },
+  "icon": "icon.png",
   "repository": {
     "type": "git",
     "url": "https://github.com/loviver/git-ai-commits"
   },
+  "bugs": {
+    "url": "https://github.com/loviver/git-ai-commits/issues"
+  },
+  "homepage": "https://marketplace.visualstudio.com/items?itemName=loviver.git-ai-commits",
   "categories": [
     "AI",
     "Programming Languages"
@@ -114,6 +123,11 @@
           "type": "string",
           "default": "{type}: {message}",
           "description": "Define your own commit convention using {type}, {message}, {scope}."
+        },
+        "git-ai-commits.autoUpdatePrompt": {
+          "type": "boolean",
+          "default": true,
+          "description": "Habilita la optimización automática de prompts sin necesidad de actualizar la extensión. Activa esta opción para obtener mejoras en los prompts desde una fuente confiable."
         }
       }
     }

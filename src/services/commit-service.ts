@@ -2,13 +2,13 @@ import * as vscode from 'vscode';
 import { getGitBranch, getGitDiff } from './git-service';
 import { codeOfuscator } from './ofuscator-service';
 
-import generalCommitsPrompt from '../prompts/prompt-commits.txt';
-import styleConventionalPrompt from '../prompts/style-conventional.txt';
-import styleEmojisPrompt from '../prompts/style-emojis.txt';
-
 import AppConfig from './app-config';
 import { AgentManager } from './ai-agent';
 import { replacePlaceholders } from '../utils/replace-placeholders';
+
+import generalCommitsPromptDefault from '../prompts/prompt-commits.txt';
+import styleConventionalPromptDefault from '../prompts/style-conventional.txt';
+import styleEmojisPromptDefault from '../prompts/style-emojis.txt';
 
 let agentManager: AgentManager = new AgentManager();
 
@@ -25,33 +25,64 @@ export async function generateCommitMessages(
   const branchName = await getGitBranch();
   let diff = await getGitDiff();
 
-  if (!diff) {
-    return [];
+  if (!diff || (diff && diff.trim() === "")) {
+    return null;
   }
 
-  diff = codeOfuscator(diff);
+  let ofuscatedCode = codeOfuscator(diff);
+
+  console.log({
+    ofuscatedCode, diff
+  });
 
   const config = vscode.workspace.getConfiguration(AppConfig.name);
-  const langCommits = config.get<string>("lang") || "english";
-  const convention = config.get<string>('convention', 'conventional');
+  const autoUpdatePrompt = config.get<boolean>('autoUpdatePrompt', true);
+  const langCommits = config.get<string>('lang', 'english');
+  const conventionName = config.get<string>('convention', 'conventional');
+  const customStyle = config.get<string>('customConvention', '{type}: {message}');
 
-  let style = getCommitStyle(convention, config);
+  let generalCommitsPrompt = generalCommitsPromptDefault;
+  let styleConventionalPrompt = styleConventionalPromptDefault;
+  let styleEmojisPrompt = styleEmojisPromptDefault;
+
+  if (autoUpdatePrompt) {
+    try {
+      const [generalRemote, conventionalRemote, emojisRemote] = await Promise.all([
+        fetchPrompt("prompt-commits.txt"),
+        fetchPrompt("style-conventional.txt"),
+        fetchPrompt("style-emojis.txt"),
+      ]);
+
+      generalCommitsPrompt = generalRemote ?? generalCommitsPrompt;
+      styleConventionalPrompt = conventionalRemote ?? styleConventionalPrompt;
+      styleEmojisPrompt = emojisRemote ?? styleEmojisPrompt;
+    } catch (error) {
+      vscode.window.showWarningMessage("⚠️ No se pudieron actualizar algunos prompts. Usando los valores locales.");
+    }
+  }
+
+  const promptStyle = getCommitStyle({
+    conventionName,
+    promptsToUse: {
+      styleConventionalPrompt,
+      styleCustomPrompt: customStyle,
+      styleEmojisPrompt,
+    },
+  });
 
   const improvedPrompt = replacePlaceholders(generalCommitsPrompt, {
     lang: langCommits.trim(),
-    style: style.trim(),
-    style_name: convention.trim()
+    style: promptStyle.trim(),
+    style_name: conventionName.trim(),
   });
 
   const response = await agentManager.askQuestion(
     `Task:
+      - You are on the branch (${branchName})
       - Analyze the following diff
   
-    Context:
-      - You are on the branch (${branchName})
-  
     \`\`\`
-    ${diff}
+    ${ofuscatedCode}
     \`\`\`
     `,
     {
@@ -68,14 +99,39 @@ export async function generateCommitMessages(
   return response || [];
 }
 
-function getCommitStyle(convention: string, config: vscode.WorkspaceConfiguration): string {
-  switch (convention) {
+async function fetchPrompt(promptName: string): Promise<string | null> {
+  const baseUrl = "https://raw.githubusercontent.com/loviver/git-ai-commits-prompts/refs/heads/main/";
+  const url = `${baseUrl}${promptName}`;
+
+  try {
+    const response = await fetch(url);
+    if (!response.ok) throw new Error(`Error HTTP ${response.status}`);
+
+    return await response.text();
+  } catch (error) {
+    vscode.window.showErrorMessage(`⚠️ No se pudo obtener el prompt: ${promptName}`);
+    return null;
+  }
+}
+interface GetCommitStyleProps {
+  conventionName: string;
+  promptsToUse: {
+    styleConventionalPrompt: string;
+    styleCustomPrompt: string;
+    styleEmojisPrompt: string;
+  }
+}
+
+function getCommitStyle({ 
+  conventionName,
+  promptsToUse
+}: GetCommitStyleProps): string {
+  switch (conventionName) {
     case 'gitmoji':
-      return styleEmojisPrompt;
+      return promptsToUse.styleEmojisPrompt;
     case 'custom':
-      const custom = config.get<string>('customConvention', '{type}: {message}');
-      return custom;
+      return promptsToUse.styleCustomPrompt;
     default:
-      return styleConventionalPrompt;
+      return promptsToUse.styleConventionalPrompt;
   }
 }

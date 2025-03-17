@@ -36,11 +36,7 @@ async function requestCommitSuggestions(
       token
     );
 
-    if(!commitMessages) {
-      return;
-    }
-    
-    if (commitMessages && commitMessages.length === 0) {
+    if (!commitMessages || (commitMessages && commitMessages.length === 0)) {
       vscode.window.showWarningMessage(i18n.t('warning.git.noStagedFiles'));
       return;
     }
