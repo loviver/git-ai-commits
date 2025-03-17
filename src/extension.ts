@@ -63,10 +63,12 @@ async function requestCommitSuggestions(
           const terminal = vscode.window.activeTerminal || vscode.window.createTerminal("Mi Terminal");
 
           if (terminal) {
+            const message = `✅ Commit confirmado: ${commitHash} | Mensaje: ${commitMessage}`;
+
             terminal.sendText(
               process.platform === "win32"
-                ? `Write-Host "✅ Commit confirmado: ${commitHash} | Mensaje: ${commitMessage}"`
-                : `echo "✅ Commit confirmado: ${commitHash} | Mensaje: ${commitMessage}"`
+                ? `Write-Host "${message}" -NoNewline; Write-Host ""`
+                : `echo -ne "\\r${message}"`
             );
           }
 
