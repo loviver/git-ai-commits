@@ -40,13 +40,19 @@
     "commands": [
       {
         "command": "git-ai-commits.requestSuggestions",
-        "title": "Generate AI-Powered Commit Suggestions",
+        "title": "Generate AI-Powered: Commit Suggestions",
         "category": "Git AI Commits",
         "description": "Analyze code changes and generate commit messages using AI."
       },
       {
+        "command": "git-ai-commits.writeCommitIdea",
+        "title": "Generate AI-Powered: Write a Commit Idea for AI Enhancement",
+        "category": "Git AI Commits",
+        "description": "Enter your own commit idea to help AI generate a more accurate and meaningful commit message."
+      },
+      {
         "command": "git-ai-commits.openSettings",
-        "title": "Open Git AI Commits Settings",
+        "title": "Generate AI-Powered: Settings",
         "category": "Git AI Commits",
         "description": "Configure AI settings for generating commit messages."
       }

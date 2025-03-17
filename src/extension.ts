@@ -15,6 +15,20 @@ export async function activate(
     vscode.commands.registerCommand('git-ai-commits.requestSuggestions', async () => {
       return requestCommitSuggestions(extensionContext, request, chatContext, stream, token);
     }),
+    vscode.commands.registerCommand('git-ai-commits.writeCommitIdea', async () => {
+      const commitIdea = await vscode.window.showInputBox({
+        prompt: "Describe tu idea para el commit",
+        placeHolder: "Añadir validación en el formulario...",
+        ignoreFocusOut: true
+      });
+    
+      if (!commitIdea) {
+        vscode.window.showWarningMessage("No ingresaste una idea para el commit.");
+        return;
+      }
+    
+      requestCommitSuggestions(extensionContext, request, chatContext, stream, token, commitIdea);
+    }),    
     vscode.commands.registerCommand('git-ai-commits.openSettings', () => openExtensionSettings())
   ];
 
@@ -26,7 +40,8 @@ async function requestCommitSuggestions(
   request: vscode.ChatRequest,
   chatContext: vscode.ChatContext,
   stream: vscode.ChatResponseStream,
-  token: vscode.CancellationToken
+  token: vscode.CancellationToken,
+  commitIdea?: string
 ) {
   try {
     const commitMessages = await generateCommitMessages(
@@ -34,7 +49,8 @@ async function requestCommitSuggestions(
       request,
       chatContext,
       stream,
-      token
+      token,
+      commitIdea
     );
 
     if (!commitMessages || (commitMessages && commitMessages.length === 0)) {

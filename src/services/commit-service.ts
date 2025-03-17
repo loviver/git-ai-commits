@@ -20,6 +20,7 @@ export async function generateCommitMessages(
   chatContext?: vscode.ChatContext, 
   stream?: vscode.ChatResponseStream, 
   token?: vscode.CancellationToken,
+  commitIdeas?: string
 ): Promise<string[] | null> {
 
   agentManager.initializeAgent();
@@ -108,6 +109,7 @@ export async function generateCommitMessages(
     `Task:
       - You are on the branch (${branchName})
       - Analyze the following diff
+      ${commitIdeas ? `- You have my following commit idea: ${commitIdeas}` : ''}
   
     \`\`\`
     ${ofuscatedCode}
