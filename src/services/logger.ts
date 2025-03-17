@@ -10,7 +10,9 @@ class Logger {
 
   static error(message: string, error?: unknown) {
     this.outputChannel.appendLine(`❌ Error: ${message}`);
-    if (error) this.outputChannel.appendLine(`Detalles: ${String(error)}`);
+    if (error) {
+      this.outputChannel.appendLine(`Detalles: ${String(error)}`);
+    }
   }
 
   static logJson(label: string, json: unknown) {

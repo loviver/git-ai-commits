@@ -35,17 +35,56 @@ function obfuscateMedium(diff: string): string {
 }
 
 function obfuscateHigh(diff: string): string {
-  return obfuscateMedium(diff)
+  const filePathPattern = /(---|\+\+\+) ([ab]\/[\w\/\.-]+)/g;
+  const filePaths: { placeholder: string; original: string }[] = [];
+
+  let match;
+  let indexedDiff = diff;
+
+  while ((match = filePathPattern.exec(diff)) !== null) {
+    const placeholder = `FILE_PATH_${filePaths.length}`;
+
+    filePaths.push({
+      placeholder,
+      original: match[2]
+    });
+
+    indexedDiff = indexedDiff.replace(match[2], placeholder);
+  }
+
+  let ofuscated = obfuscateMedium(indexedDiff)
     .replace(/\[\s*([^\]]+)\s*\]/g, '[...]') // Acortar arrays
-    .replace(/\{[^{}]{20,}\}/g, '{ ... }')  // Acortar JSON
-    .replace(/\b[A-Z_]{2,}\b/g, 'CONSTANT_NAME') // Constantes
-    .replace(/\b[a-zA-Z_][a-zA-Z0-9_]*\b/g, 'VAR_NAME') // Variables genéricas
-    .replace(/function\s+[a-zA-Z_][a-zA-Z0-9_]*/g, 'function FUNC_NAME')
-    .replace(/class\s+[a-zA-Z_][a-zA-Z0-9_]*/g, 'class CLASS_NAME');
+    .replace(/\{[^{}]{30,}\}/g, '{ ... }') // Acortar JSON, pero con un límite mayor
+    .replace(/\b([A-Z_]{2,})\b/g, (_, match) => {
+      if (["TRUE", "FALSE", "NULL", "UNDEFINED"].includes(match)) {
+        return match; // No reemplazar valores booleanos ni especiales
+      }
+      return "CONST_NAME";
+    })
+    .replace(/\b([a-zA-Z_][a-zA-Z0-9_]*)\b/g, (_, match) => {
+      if (
+        ["import", "export", "function", "class", "return"].includes(match) || 
+        match.startsWith("FILE_PATH_") // No ofuscar los placeholders de nombres de archivo
+      ) {
+        return match;
+      }
+      return "VAR_NAME";
+    })
+    .replace(/function\s+([a-zA-Z_][a-zA-Z0-9_]*)/g, "function FUNC_NAME") // Solo reemplaza nombres de funciones
+    .replace(/class\s+([a-zA-Z_][a-zA-Z0-9_]*)/g, "class CLASS_NAME"); // Solo reemplaza nombres de clases
+
+  // Restaurar nombres de archivos
+  filePaths.forEach(({ placeholder, original }) => {
+    ofuscated = ofuscated.replace(new RegExp(placeholder, "g"), original);
+  });
+
+  return ofuscated;
 }
 
 function obfuscateCustomWords(diff: string, words: string[]): string {
-  if (words.length === 0) { return diff };
+  if (words.length === 0) { 
+    return diff 
+  };
   const obfuscateRegex = new RegExp(`\\b(${words.join("|")})\\b`, "gi");
   return diff.replace(obfuscateRegex, 'PLACEHOLDER_VALUE');
 }

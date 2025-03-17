@@ -30,20 +30,20 @@ class CopilotAI extends AIModel {
     return { token: data.token, expiresAt: data.expires_at };
   }
 
-  private buildMessages(userQuery: string, context?: Record<string, unknown>): any[] {
+  private buildMessages(userQuery: string, systemContext?: string): any[] {
     const messages: any[] = [];
     
-    if (context && Object.keys(context).length > 0) {
+    if (systemContext) {
       messages.push({
         role: 'system',
-        content: `Contexto actual: ${JSON.stringify(context)}`
+        content: systemContext
       });
     }
     
     // Mensaje principal
     messages.push({
       role: 'user',
-      content: `${userQuery}`
+      content: userQuery
     });
     
     return messages;
@@ -108,8 +108,12 @@ class CopilotAI extends AIModel {
     if(token === null) {
       throw new Error('No se pudo obtener el token de autenticación');
     }
-
-    const messages = this.buildMessages(prompt, contextToUse);
+    const contextSystem = 
+    contextToUse?.system && typeof contextToUse.system === "string" 
+      ? contextToUse.system 
+      : JSON.stringify(contextToUse);
+  
+    const messages = this.buildMessages(prompt, contextSystem);
 
     if(providerFamily) {
       const limitExceed = doesPromptExceedLimit(JSON.stringify(messages), providerFamily as ModelsList);

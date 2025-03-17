@@ -48,19 +48,44 @@ export async function generateCommitMessages(
   let styleConventionalPrompt = styleConventionalPromptDefault;
   let styleEmojisPrompt = styleEmojisPromptDefault;
 
-  if (autoUpdatePrompt) {
+  if(autoUpdatePrompt) {
     try {
-      const [generalRemote, conventionalRemote, emojisRemote] = await Promise.all([
-        fetchPrompt("prompt-commits.txt"),
-        fetchPrompt("style-conventional.txt"),
-        fetchPrompt("style-emojis.txt"),
-      ]);
+      const promptFiles = [
+        { key: "generalCommitsPrompt", file: "prompt-commits.txt" },
+        { key: "styleConventionalPrompt", file: "style-conventional.txt" },
+        { key: "styleEmojisPrompt", file: "style-emojis.txt" },
+      ];
+    
+      const prompts: Record<string, string> = {};
+    
+      const responses = await Promise.all(
+        promptFiles.map(({ file }) => fetchPrompt(file))
+      );
+    
+      responses.forEach((response: any, index) => {
+        const { key, file } = promptFiles[index];
+        
+        if (response.status === "success") {
+          prompts[key] = response.data;
+        } else {
+          Logger.error(`Error al obtener ${file}:`, response.error);
+        }
+      });
 
-      generalCommitsPrompt = generalRemote ?? generalCommitsPrompt;
-      styleConventionalPrompt = conventionalRemote ?? styleConventionalPrompt;
-      styleEmojisPrompt = emojisRemote ?? styleEmojisPrompt;
+      if(prompts.generalCommitsPrompt) {
+        generalCommitsPrompt = prompts.generalCommitsPrompt;
+        Logger.logJson(`Prompt 'generalCommitsPrompt' actualizado.`, generalCommitsPrompt);
+      }
+      if(prompts.styleConventionalPrompt) {
+        styleConventionalPrompt = prompts.styleConventionalPrompt;
+        Logger.log(`Prompt 'styleConventionalPrompt' actualizado.`);
+      }
+      if(prompts.styleEmojisPrompt) {
+        styleEmojisPrompt = prompts.styleEmojisPrompt;
+        Logger.log(`Prompt 'styleEmojisPrompt' actualizado.`);
+      }
     } catch (error) {
-      Logger.error("Error al obtener los prompts remotos", error);
+      Logger.error("Error general al obtener los prompts remotos", error);
     }
   }
 
@@ -102,25 +127,30 @@ export async function generateCommitMessages(
   return response || [];
 }
 
-async function fetchPrompt(promptName: string): Promise<string | null> {
+async function fetchPrompt(promptName: string): Promise<{
+  status: string,
+  data: any
+}> {
   const baseUrl = "https://raw.githubusercontent.com/loviver/git-ai-commits-prompts/refs/heads/main/";
   const url = `${baseUrl}${promptName}`;
 
   try {
     const response = await fetch(url);
-    if (!response.ok) throw new Error(`Error HTTP ${response.status}`);
+    if (!response.ok) {
+      throw new Error(`Error HTTP ${response.status}`);
+    }
 
     const responseText = await response.text();
-    
-    Logger.logJson('fetchPrompt', {
-      promptName,
-      response: responseText
-    });
-    
-    return responseText;
-  } catch (error) {
-    vscode.window.showErrorMessage(`⚠️ No se pudo obtener el prompt: ${promptName}`);
-    return null;
+
+    return {
+      status: 'success',
+      data: responseText,
+    };
+  } catch (error: any) {
+    return {
+      status: 'error',
+      data: error.message || 'Error desconocido',
+    };
   }
 }
 interface GetCommitStyleProps {
