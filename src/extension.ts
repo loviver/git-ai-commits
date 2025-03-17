@@ -57,13 +57,18 @@ async function requestCommitSuggestions(
         try {
           const commit = await git.commit(selectedMessage);
 
-          const terminal = vscode.window.activeTerminal || vscode.window.createTerminal("Mi Terminal");
-          
-          if(terminal) {
-            terminal.sendText(`echo Commit confirmado: ${commit.commit} | Mensaje: ${selectedMessage}`);
-          }
+          const commitMessage = selectedMessage.replace(/"/g, '\\"');
+          const commitHash = commit.commit;
 
-          // s
+          const terminal = vscode.window.activeTerminal || vscode.window.createTerminal("Mi Terminal");
+
+          if (terminal) {
+            terminal.sendText(
+              process.platform === "win32"
+                ? `echo Commit confirmado: ${commitHash} ^| Mensaje: "${commitMessage}"`
+                : `echo "Commit confirmado: ${commitHash} | Mensaje: \\"${commitMessage}\\""`
+            );
+          }
 
           vscode.window.showInformationMessage(i18n.t('success.commit.confirmed', { error: selectedMessage }));
         } catch (error: any) {
