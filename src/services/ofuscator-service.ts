@@ -83,7 +83,7 @@ function obfuscateHigh(diff: string): string {
 
 function obfuscateCustomWords(diff: string, words: string[]): string {
   if (words.length === 0) { 
-    return diff 
+    return diff;
   };
   const obfuscateRegex = new RegExp(`\\b(${words.join("|")})\\b`, "gi");
   return diff.replace(obfuscateRegex, 'PLACEHOLDER_VALUE');
