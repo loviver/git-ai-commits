@@ -9,6 +9,6 @@
 
   "info.commit.selectMessage": "Select a commit message.",
 
-  "success.commit.confirmed": "Changes successfully committed.",
+  "success.commit.confirmed": "Changes successfully committed: ${commit} ${message}",
   "success.clipboard.copied": "Message copied to clipboard."
 }
