@@ -63,6 +63,8 @@ async function requestCommitSuggestions(
             terminal.sendText(`echo Commit confirmado: ${commit.commit} | Mensaje: ${selectedMessage}`);
           }
 
+          // s
+
           vscode.window.showInformationMessage(i18n.t('success.commit.confirmed', { error: selectedMessage }));
         } catch (error: any) {
           vscode.window.showErrorMessage(i18n.t('error.commit.failed', { commit: selectedMessage, error: error.message ?? error }));
