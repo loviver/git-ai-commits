@@ -55,7 +55,14 @@ async function requestCommitSuggestions(
         const workspacePath = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath || "";
         const git = simpleGit(workspacePath);
         try {
-          await git.commit(selectedMessage);
+          const commit = await git.commit(selectedMessage);
+
+          const terminal = vscode.window.activeTerminal || vscode.window.createTerminal("Mi Terminal");
+          
+          if(terminal) {
+            terminal.sendText(`echo "Commit confirmado ${commit.commit}: ${selectedMessage}"`);
+          }
+
           vscode.window.showInformationMessage(i18n.t('success.commit.confirmed', { error: selectedMessage }));
         } catch (error: any) {
           vscode.window.showErrorMessage(i18n.t('error.commit.failed', { commit: selectedMessage, error: error.message ?? error }));

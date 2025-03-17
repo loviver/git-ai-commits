@@ -4,7 +4,7 @@
   "displayName": "AI-Powered Git Commits",
   "description": "Suggest commits with AI's",
   "author": "loviver <@loviver>",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "engines": {
     "vscode": "^1.98.0"
   },
