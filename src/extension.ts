@@ -2,6 +2,7 @@ import * as vscode from 'vscode';
 import simpleGit from 'simple-git';
 import { generateCommitMessages } from './services/commit-service';
 import { i18n } from './services/i18n';
+import Logger from './services/logger';
 
 export async function activate(
   extensionContext: vscode.ExtensionContext,
@@ -79,4 +80,7 @@ async function openExtensionSettings() {
   }
 }
 
-export function deactivate() {}
+export function deactivate() {
+  Logger.log("Desactivando la extensión...");
+  Logger.dispose();
+}

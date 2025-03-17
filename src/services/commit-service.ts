@@ -10,6 +10,8 @@ import generalCommitsPromptDefault from '../prompts/prompt-commits.txt';
 import styleConventionalPromptDefault from '../prompts/style-conventional.txt';
 import styleEmojisPromptDefault from '../prompts/style-emojis.txt';
 
+import Logger from "./logger";
+
 let agentManager: AgentManager = new AgentManager();
 
 export async function generateCommitMessages(
@@ -17,7 +19,7 @@ export async function generateCommitMessages(
   request?: vscode.ChatRequest, 
   chatContext?: vscode.ChatContext, 
   stream?: vscode.ChatResponseStream, 
-  token?: vscode.CancellationToken
+  token?: vscode.CancellationToken,
 ): Promise<string[] | null> {
 
   agentManager.initializeAgent();
@@ -31,8 +33,9 @@ export async function generateCommitMessages(
 
   let ofuscatedCode = codeOfuscator(diff);
 
-  console.log({
-    ofuscatedCode, diff
+  Logger.logJson('diff', {
+    diff,
+    ofuscatedCode
   });
 
   const config = vscode.workspace.getConfiguration(AppConfig.name);
@@ -57,7 +60,7 @@ export async function generateCommitMessages(
       styleConventionalPrompt = conventionalRemote ?? styleConventionalPrompt;
       styleEmojisPrompt = emojisRemote ?? styleEmojisPrompt;
     } catch (error) {
-      vscode.window.showWarningMessage("⚠️ No se pudieron actualizar algunos prompts. Usando los valores locales.");
+      Logger.error("Error al obtener los prompts remotos", error);
     }
   }
 
@@ -107,7 +110,14 @@ async function fetchPrompt(promptName: string): Promise<string | null> {
     const response = await fetch(url);
     if (!response.ok) throw new Error(`Error HTTP ${response.status}`);
 
-    return await response.text();
+    const responseText = await response.text();
+    
+    Logger.logJson('fetchPrompt', {
+      promptName,
+      response: responseText
+    });
+    
+    return responseText;
   } catch (error) {
     vscode.window.showErrorMessage(`⚠️ No se pudo obtener el prompt: ${promptName}`);
     return null;
