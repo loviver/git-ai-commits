@@ -4,9 +4,9 @@
   "displayName": "AI-Powered Git Commits",
   "description": "Suggest commits with AI's",
   "author": "loviver <@loviver>",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "engines": {
-    "vscode": "^1.98.0"
+    "vscode": "^1.96.2"
   },
   "galleryBanner": {
     "color": "#ffe04b",
@@ -158,7 +158,7 @@
     "@types/axios": "^0.9.36",
     "@types/mocha": "^10.0.10",
     "@types/node": "20.x",
-    "@types/vscode": "^1.98.0",
+    "@types/vscode": "^1.96.2",
     "@typescript-eslint/eslint-plugin": "^8.25.0",
     "@typescript-eslint/parser": "^8.25.0",
     "@vscode/test-cli": "^0.0.10",

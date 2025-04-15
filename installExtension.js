@@ -17,7 +17,7 @@ function getLatestVSIX() {
 
 function installExtension() {
     console.log("📦 Empaquetando la extensión...");
-    execSync("vsce package", { stdio: "inherit" });
+    execSync("npx vsce package", { stdio: "inherit" });
 
     const latestVSIX = getLatestVSIX();
     if (!latestVSIX) {
