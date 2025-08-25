@@ -4,9 +4,9 @@
   "displayName": "AI-Powered Git Commits",
   "description": "Suggest commits with AI's",
   "author": "loviver <@loviver>",
-  "version": "1.0.7",
+  "version": "1.1.0",
   "engines": {
-    "vscode": "^1.96.2"
+    "vscode": "^1.98.0"
   },
   "galleryBanner": {
     "color": "#ffe04b",
@@ -122,7 +122,11 @@
         "git-ai-commits.convention": {
           "type": "string",
           "default": "conventional",
-          "enum": ["conventional", "gitmoji", "custom"],
+          "enum": [
+            "conventional",
+            "gitmoji",
+            "custom"
+          ],
           "description": "Select the commit message convention."
         },
         "git-ai-commits.customConvention": {
@@ -139,17 +143,17 @@
     }
   },
   "scripts": {
-    "vscode:prepublish": "yarn run package",
-    "compile": "yarn run check-types && yarn run lint && node esbuild.js",
+    "vscode:prepublish": "npm run package",
+    "compile": "npm run check-types && npm run lint && node esbuild.js",
     "watch-dev": "npm-run-all -p watch:esbuild watch:extension",
     "watch:esbuild": "node esbuild.js --watch",
     "watch:extension": "node installExtension.js --watch",
     "watch": "npm-run-all -p watch:* watch:extension",
     "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
     "watch-tests": "tsc -p . -w --outDir out",
-    "package": "yarn run check-types && yarn run lint && node esbuild.js --production",
+    "package": "npm run check-types && npm run lint && node esbuild.js --production",
     "compile-tests": "tsc -p . --outDir out",
-    "pretest": "yarn run compile-tests && yarn run compile && yarn run lint",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
     "check-types": "tsc --noEmit",
     "lint": "eslint src",
     "test": "vscode-test"
@@ -157,20 +161,21 @@
   "devDependencies": {
     "@types/axios": "^0.9.36",
     "@types/mocha": "^10.0.10",
-    "@types/node": "20.x",
-    "@types/vscode": "^1.96.2",
-    "@typescript-eslint/eslint-plugin": "^8.25.0",
-    "@typescript-eslint/parser": "^8.25.0",
-    "@vscode/test-cli": "^0.0.10",
+    "@types/node": "^24.3.0",
+    "@types/vscode": "^1.98.0",
+    "@typescript-eslint/eslint-plugin": "^8.40.0",
+    "@typescript-eslint/parser": "^8.40.0",
+    "@vscode/test-cli": "^0.0.11",
     "@vscode/test-electron": "^2.4.1",
-    "esbuild": "^0.25.0",
-    "eslint": "^9.21.0",
+    "esbuild": "^0.25.9",
+    "eslint": "^9.34.0",
     "nodemon": "^3.1.9",
     "npm-run-all": "^4.1.5",
-    "typescript": "^5.7.3"
+    "typescript": "^5.9.2"
   },
   "dependencies": {
-    "axios": "^1.8.3",
-    "simple-git": "^3.27.0"
-  }
+    "axios": "^1.11.0",
+    "simple-git": "^3.28.0"
+  },
+  "packageManager": "yarn@4.9.3+sha512.8295ee814f6b253e16f516416481b481a215ed03ef1ae38524d108084872560a9ed75aeb23b91ab64222062ac4149a594150ae538c2a9536fdbcefd4e49b11cc"
 }

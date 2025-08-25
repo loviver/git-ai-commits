@@ -14,3 +14,14 @@ package-lock.json
 **/*.map
 **/*.ts
 **/.vscode-test.*
+
+# Documentation files (not needed in package)
+NUEVA-FUNCIONALIDAD.md
+REGLAS-PERSONALIZADAS.md
+ACTUALIZACION.md
+.git-ai-commits.rules.example
+
+# Development files
+installExtension.js
+.cursorrules
+.cursorignore

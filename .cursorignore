@@ -1,0 +1,39 @@
+# Cursor-specific ignores (similar to .gitignore but for Cursor AI)
+# Temporary files
+*.tmp
+*.temp
+.tmp/
+
+# Build outputs
+dist/
+out/
+node_modules/
+
+# Log files
+*.log
+logs/
+
+# Test coverage
+coverage/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# IDE files
+*.swp
+*.swo
+
+# Large binary files
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.ico
+*.woff
+*.woff2
+*.ttf
+*.eot
+
+# Example files
+*.example

@@ -1,0 +1,92 @@
+# Cursor AI Rules for git-ai-commits project
+
+## Project Context
+
+This is a VSCode extension that generates AI-powered Git commit messages. It uses TypeScript, supports multiple AI providers (GitHub Copilot, Gemini), and follows conventional commit patterns.
+
+## Code Style & Standards
+
+- Use TypeScript strict mode
+- Follow ESLint configuration defined in eslint.config.mjs
+- Use conventional commits format
+- Maintain consistent naming conventions (camelCase for functions/variables, PascalCase for classes)
+- Add JSDoc comments for public APIs
+
+## Architecture Patterns
+
+- Services are located in src/services/
+- AI agents are in src/services/agents/
+- Follow dependency injection pattern
+- Use async/await for asynchronous operations
+- Handle errors gracefully with try-catch blocks
+
+## Extension Development
+
+- Follow VSCode extension best practices
+- Use VSCode API types from @types/vscode
+- Register commands in package.json contributes.commands
+- Use configuration properties for user settings
+- Implement proper activation events
+
+## AI Integration
+
+- Support multiple AI providers (Copilot, Gemini)
+- Implement token counting for API efficiency
+- Use prompt templates from src/prompts/
+- Handle API errors and rate limiting
+
+## Git Integration
+
+- Use simple-git library for Git operations
+- Handle different Git states (staged, unstaged, conflicts)
+- Sanitize sensitive information from diffs
+- Support various commit conventions
+
+## Internationalization
+
+- Support multiple languages via i18n service
+- Use language codes (en, es, fr, etc.)
+- Maintain translation consistency
+
+## Testing
+
+- Write unit tests for services
+- Test extension commands and configuration
+- Use VSCode test framework
+- Mock external dependencies (Git, AI APIs)
+
+## File Organization
+
+```
+src/
+├── extension.ts          # Main extension entry point
+├── services/            # Business logic services
+│   ├── agents/          # AI provider implementations
+│   ├── ai-agent.ts      # AI agent abstraction
+│   ├── commit-service.ts # Commit message generation
+│   ├── git-service.ts   # Git operations
+│   └── ...
+├── utils/              # Utility functions
+├── prompts/            # AI prompt templates
+└── types.d.ts          # Type definitions
+```
+
+## Key Dependencies
+
+- axios: HTTP client for API calls
+- simple-git: Git operations
+- @types/vscode: VSCode extension API types
+
+## Development Workflow
+
+- Use `yarn watch` for development
+- Run `yarn lint` before commits
+- Use `yarn package` for production builds
+- Test in VSCode extension host
+
+## Configuration
+
+- Support both global and workspace settings
+- Provide sensible defaults
+- Validate configuration values
+- Handle migration of old settings

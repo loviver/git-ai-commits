@@ -1,0 +1,55 @@
+# Archivo de Reglas Personalizadas para Git AI Commits
+# 
+# Este archivo permite definir reglas específicas del proyecto que tendrán 
+# prioridad absoluta sobre todas las reglas por defecto de la extensión.
+#
+# Para activar estas reglas, renombra este archivo a: .git-ai-commits.rules
+# 
+# INSTRUCCIONES:
+# - Las reglas aquí definidas tienen la máxima prioridad
+# - Serán aplicadas por encima de cualquier configuración global
+# - Útil para proyectos con convenciones específicas de commits
+#
+# ============================================================================
+
+## REGLAS ESPECÍFICAS DEL PROYECTO
+
+### Convenciones de Mensajes
+- SIEMPRE usar el formato: [TIPO]: Descripción en español
+- Los tipos válidos son: [FEAT], [FIX], [DOCS], [STYLE], [REFACTOR], [TEST], [CHORE]
+- La descripción debe ser clara y específica
+- Máximo 72 caracteres en el título
+- NO usar emojis en los commits
+
+### Contexto del Proyecto
+- Este es un proyecto de extensión de VSCode para generar commits con IA
+- Mencionar siempre el área afectada: services/, utils/, prompts/, etc.
+- Para cambios en servicios, especificar qué servicio se modifica
+- Para nuevas funcionalidades, explicar brevemente el propósito
+
+### Ejemplos de Buenos Commits para este proyecto:
+- [FEAT]: Agregar detección de reglas personalizadas en commit-service
+- [FIX]: Corregir lectura de archivos en utils/sanitize-input
+- [REFACTOR]: Optimizar prompt loading en ai-agent service
+- [DOCS]: Actualizar README con nueva funcionalidad de reglas
+
+### Reglas de Idioma
+- Los commits deben estar en español
+- Usar terminología técnica apropiada
+- Ser descriptivo pero conciso
+
+### Estructura del Cuerpo del Commit (cuando sea necesario)
+- Explicar el "por qué" del cambio
+- Mencionar cualquier breaking change
+- Referenciar issues si aplica: Closes #123
+
+### Archivos Importantes a Considerar
+- src/services/: Lógica de negocio principal
+- src/utils/: Funciones de utilidad
+- src/prompts/: Templates de prompts para IA
+- package.json: Configuración y dependencias
+- .cursorrules: Reglas específicas para Cursor AI
+
+## NOTA IMPORTANTE:
+Estas reglas sobrescriben completamente las reglas por defecto de la extensión.
+Asegúrate de que las reglas definidas aquí sean completas y específicas.
